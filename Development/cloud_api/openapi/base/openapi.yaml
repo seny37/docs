@@ -146,7 +146,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /user.update:
-    get:
+    post:
       tags:
         - user
       summary: Update user information
@@ -294,7 +294,7 @@ paths:
                   - authorization_code_not_exists
       parameters: []
   /user.token.update:
-    get:
+    post:
       tags:
         - user
       summary: Update user auth token
@@ -313,7 +313,7 @@ paths:
                   - authorization_code_not_exists
       parameters: []
   /user.token.remove:
-    get:
+    post:
       tags:
         - user
       summary: Remove user auth token
@@ -344,7 +344,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /user.virtual_gateways.create:
-    get:
+    post:
       tags:
         - user
       summary: Create virtual gateway sn
@@ -496,7 +496,7 @@ paths:
                   - exception
                   - has_no_permission
   /{category}.activities.disponse:
-    get:
+    post:
       tags:
         - activities
       summary: Disponse the activity
@@ -644,7 +644,7 @@ paths:
                   - exception
                   - has_no_permission
   /{category}.event.disponse:
-    get:
+    post:
       tags:
         - events
       summary: Disponse event
@@ -717,7 +717,7 @@ paths:
                 enum: 
                   - exception
   /{object}.tags.create:
-    get:
+    post:
       tags:
         - xtags
       summary: Create tags for specified object
@@ -763,7 +763,7 @@ paths:
                   - exception
                   - has_no_permission
   /{object}.tags.remove:
-    get:
+    post:
       tags:
         - xtags
       summary: Remove tags from object
@@ -808,7 +808,7 @@ paths:
                   - exception
                   - has_no_permission
   /{object}.tags.clear:
-    get:
+    post:
       tags:
         - xtags
       summary: Clear all tags from object
@@ -1872,7 +1872,7 @@ paths:
                 enum: 
                   - exception
   /store.{operation}.create:
-    get:
+    post:
       tags:
         - store
       summary: Create store {operation} object
@@ -1947,7 +1947,7 @@ paths:
                 enum: 
                   - exception
   /store.{operation}.update:
-    get:
+    post:
       tags:
         - store
       summary: Update store operation object information
@@ -1986,7 +1986,7 @@ paths:
                 enum: 
                   - exception
   /store.{operation}.remove:
-    get:
+    post:
       tags:
         - store
       summary: Remove store {operation} object
@@ -2095,9 +2095,6 @@ components:
     GatewayNew:
       type: object
       properties:
-        name:
-          type: string
-          description: Gateway devce serial number.
         device_name:
           type: string
           description: Gateway device name specified by user.
