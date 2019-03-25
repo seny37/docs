@@ -1,13 +1,13 @@
 openapi: 3.0.0
 servers:
-  - url: 'http://localhost/api/v1/'
-    description: Local Testing Server
   - url: 'http://ioe.thingsroot.com/api/v1/'
-    description: Publish Server
+    description: 公网服务器
+  - url: 'http://localhost/api/v1/'
+    description: 本地测试服务器
 info:
-  description: 'This is a thingsroot cloud server. '
+  description: '冬笋云基础服务接口'
   version: 1.0.0
-  title: ThingsRoot Cloud Base APIs
+  title: 冬笋云基础服务接口
   termsOfService: 'http://thingsroot.com/terms/'
   contact:
     email: dirk.chang@thingsroot.com
@@ -16,40 +16,40 @@ info:
     url: 'https://opensource.org/licenses/MIT'
 tags:
   - name: user
-    description: Everything about your account
+    description: 用户账户以及相关信息
     externalDocs:
       description: Find out more
       url: 'http://thingsroot.com'
   - name: gateways
-    description: Everything about your freeioe gateway devices
+    description: FreeIOE网关管理接口
     externalDocs:
       description: Find out more
       url: 'http://thingsroot.com'
   - name: applications
-    description: FreeIOE Application Store
+    description: FreeIOE应用管理接口
     externalDocs:
      description: Find out more
      url: 'http://freeioe.org'
   - name: configurations
-    description: 'Operations about device configuration, application templates'
+    description: '配置（设备配置以及设备模板）管理接口'
   - name: companies
-    description: 'Operations about device configuration, application templates'
+    description: '公司组织管理接口'
   - name: activities
-    description: Platform activities
+    description: 平台事件接口
   - name: events
-    description: Device event
+    description: 设备事件接口
   - name: pushers
-    description: Cloud Pushers
+    description: 云数据发布接口
   - name: store
-    description: Cloud Application Store
+    description: 应用市场接口
   - name: xtags
-    description: Object tags
+    description: 标签管理接口
 paths:
   /user.test:
     get:
       tags:
         - user
-      summary: Test api avaiable
+      summary: 接口测试
       operationId: testUser
       responses:
         '200':
@@ -60,8 +60,8 @@ paths:
     post:
       tags:
         - user
-      summary: Create user
-      description: For sign up page, when user not logined.
+      summary: 创建用户
+      description: 用户创建新用户.
       operationId: createUser
       responses:
         '200':
@@ -73,26 +73,26 @@ paths:
           application/json:
             schema:
               $ref: '#/components/schemas/UserSignup'
-        description: Created user object
+        description: 用户注册信息
         required: true
       parameters: []
   /user.login:
     post:
       tags:
         - user
-      summary: Logs user into the system
-      description: Login with pasword
+      summary: 用户登录
+      description: 用户使用用户名密码进行登录
       operationId: loginUser
       parameters:
         - name: username
           in: query
-          description: The user name for login
+          description: 用户名(邮箱ID)
           required: true
           schema:
             type: string
         - name: password
           in: query
-          description: The password for login in clear text
+          description: 密码
           required: true
           schema:
             type: string
@@ -114,7 +114,7 @@ paths:
     post:
       tags:
         - user
-      summary: Logs out current logged in user session
+      summary: 注销当前登入用户
       description: ''
       operationId: logoutUser
       responses:
@@ -125,7 +125,7 @@ paths:
     get:
       tags:
         - user
-      summary: Get user csrf_token
+      summary: 获取 csrf_token
       operationId: csrfTokenUser
       responses:
         '200':
@@ -137,8 +137,8 @@ paths:
     get:
       tags:
         - user
-      summary: Get user information
-      description: Get user information after logined.
+      summary: 获取用户信息
+      description: 用户登录后显示的用户信息.
       operationId: getUserInfo
       responses:
         '200':
@@ -149,8 +149,8 @@ paths:
     post:
       tags:
         - user
-      summary: Update user information
-      description: Update your account information after logined.
+      summary: 更新信息
+      description: 更新个人账户的个人信息.
       operationId: updateUserInfo
       requestBody:
         required: true
@@ -162,17 +162,17 @@ paths:
               properties:
                 email:
                   type: string
-                  description: Email address
+                  description: 邮件地址（此字段只用户鉴定用户ID,不可更改）
                 phone:
                   type: string
                   format: phone
-                  description: Phone number
+                  description: 电话号码
                 first_name:
                   type: string
-                  description: First name
+                  description: 名字
                 last_name:
                   type: string
-                  description: Last name
+                  description: 姓氏
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -189,8 +189,8 @@ paths:
     post:
       tags:
         - user
-      summary: Update user password
-      description: Reset user password with reset key or with logged in session
+      summary: 更新密码
+      description: 在用户登入后，或使用密码重设密钥，进行用户密码更新操作
       operationId: updatePassword
       requestBody:
         content:
@@ -207,10 +207,10 @@ paths:
                     - 1
                 key:
                   type: string
-                  description: Password reset key
+                  description: 密码重设密钥
                 old_password:
                   type: string
-                  description: Old Password (available if no key specified)
+                  description: 旧密码（当不使用重设密钥时必填)
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -230,8 +230,8 @@ paths:
     post:
       tags:
         - user
-      summary: Reset user password
-      description: Server will send password reset email to your email box
+      summary: 获取密码重置密钥
+      description: 服务器会发送重置密钥到用户邮箱
       operationId: resetPassword
       responses:
         '200':
@@ -257,7 +257,7 @@ paths:
     post:
       tags:
         - user
-      summary: Create user auth token
+      summary: 创建用户授权认证ID
       operationId: createUserToken
       responses:
         '200':
@@ -277,8 +277,8 @@ paths:
     get:
       tags:
         - user
-      summary: Get user auth token
-      description: Get user auth token for access apis in your client instead of cookies
+      summary: 获取用户授权认证ID
+      description: 获取用户授权认证ID，用以非登录模式API鉴权。
       operationId: getUserToken
       responses:
         '200':
@@ -297,7 +297,7 @@ paths:
     post:
       tags:
         - user
-      summary: Update user auth token
+      summary: 更换授权认证ID
       operationId: updateUserToken
       responses:
         '200':
@@ -316,7 +316,7 @@ paths:
     post:
       tags:
         - user
-      summary: Remove user auth token
+      summary: 清楚授权认证ID
       operationId: removeUserToken
       responses:
         '200':
@@ -336,7 +336,7 @@ paths:
     get:
       tags:
         - user
-      summary: List virtual gateway sn
+      summary: 获取虚拟网关ID列表
       operationId: listUserGateway
       responses:
         '200':
@@ -347,7 +347,7 @@ paths:
     post:
       tags:
         - user
-      summary: Create virtual gateway sn
+      summary: 创建一个新的虚拟网关ID
       operationId: createUserGateway
       responses:
         '200':
@@ -367,7 +367,7 @@ paths:
     get:
       tags:
         - user
-      summary: Get virtual gateway information
+      summary: 获取虚拟网关ID信息
       operationId: getUserGatewayInfo
       responses:
         '200':
@@ -388,13 +388,13 @@ paths:
     get:
       tags:
         - activities
-      summary: Get activities
-      description: Event list contains the event detailed infomration object
+      summary: 获取平台事件列表
+      description: 列表对象包含每个事件的详细信息
       operationId: listActivity
       parameters:
         - name: category
           in: path
-          description: Activity category
+          description: 平台事件归属
           required: true
           schema:
             type: string
@@ -404,25 +404,25 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Activity category id
+          description: 平台事件归属ID
           required: true
           schema:
             type: string
         - name: start
           in: query
-          description: Start postion
+          description: 起始位置
           required: false
           schema:
             type: int
         - name: limit
           in: query
-          description: Limitation Count
+          description: 请求数量
           required: false
           schema:
             type: int
         - name: filters
           in: query
-          description: Activity Filters
+          description: 过滤条件
           required: false
           schema:
             type: object
@@ -444,12 +444,12 @@ paths:
     get:
       tags:
         - activities
-      summary: Get activities count
+      summary: 获取平台事件数量
       operationId: countActivity
       parameters:
         - name: category
           in: path
-          description: Activity category
+          description: 平台事件归属
           required: true
           schema:
             type: string
@@ -459,13 +459,13 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Activity category id
+          description: 平台事件归属ID
           required: true
           schema:
             type: string
         - name: filters
           in: query
-          description: Activity filters.
+          description: 过滤条件
           required: false
           schema:
             type: object
@@ -487,12 +487,12 @@ paths:
     get:
       tags:
         - activities
-      summary: Get detailed activity information
+      summary: 获取平台事件详细信息
       operationId: getActivityInfo
       parameters:
         - name: category
           in: path
-          description: Activity category
+          description: 平台事件归属
           required: true
           schema:
             type: string
@@ -502,7 +502,7 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Activity id
+          description: 平台事件ID
           required: true
           schema:
             type: string
@@ -524,12 +524,12 @@ paths:
     post:
       tags:
         - activities
-      summary: Disponse the activity
+      summary: 设定已处理标记
       operationId: disponseActivity
       parameters:
         - name: category
           in: path
-          description: Activity category
+          description: 平台事件归属
           required: true
           schema:
             type: string
@@ -539,7 +539,7 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Activity id
+          description: 平台事件归属ID
           required: true
           schema:
             type: string
@@ -561,13 +561,13 @@ paths:
     get:
       tags:
         - events
-      summary: Get events
-      description: Event list contains the event detailed infomration object
+      summary: 获取设备事件列表
+      description: 列表对象包含每个事件的详细信息
       operationId: listEvent
       parameters:
         - name: category
           in: path
-          description: Event category
+          description: 事件归属
           required: true
           schema:
             type: string
@@ -577,25 +577,25 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Event category id
+          description: 事件归属ID
           required: true
           schema:
             type: string
         - name: start
           in: query
-          description: Start postion
+          description: 起始位置
           required: false
           schema:
             type: int
         - name: limit
           in: query
-          description: Limitation Count
+          description: 请求数量
           required: false
           schema:
             type: int
         - name: filters
           in: query
-          description: Event Filters
+          description: 过滤条件
           required: false
           schema:
             type: object
@@ -617,12 +617,12 @@ paths:
     get:
       tags:
         - events
-      summary: Get events count
+      summary: 获取设备事件数量
       operationId: countEvent
       parameters:
         - name: category
           in: path
-          description: Event category
+          description: 事件归属
           required: true
           schema:
             type: string
@@ -632,13 +632,13 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Event category id
+          description: 事件归属ID
           required: true
           schema:
             type: string
         - name: filters
           in: query
-          description: Event Filters
+          description: 过滤条件
           required: false
           schema:
             type: object
@@ -660,12 +660,12 @@ paths:
     get:
       tags:
         - events
-      summary: Get event detailed information 
+      summary: 或设备时间详细信息
       operationId: getEventInfo
       parameters:
         - name: category
           in: path
-          description: Event category
+          description: 事件归属
           required: true
           schema:
             type: string
@@ -675,7 +675,7 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Event id
+          description: 事件ID
           required: true
           schema:
             type: string
@@ -697,12 +697,12 @@ paths:
     post:
       tags:
         - events
-      summary: Disponse event
+      summary: 设定已处理标记
       operationId: disponseEvent
       parameters:
         - name: category
           in: path
-          description: Event category
+          description: 事件归属
           required: true
           schema:
             type: string
@@ -712,7 +712,7 @@ paths:
               - gateways
         - name: name
           in: query
-          description: Event id
+          description: 事件ID
           required: true
           schema:
             type: string
@@ -734,12 +734,12 @@ paths:
     get:
       tags:
         - xtags
-      summary: Get object tags 
+      summary: 获取标签列表
       operationId: listTags
       parameters:
         - name: object
           in: path
-          description: Object type
+          description: 对象类型
           required: true
           schema:
             type: string
@@ -749,7 +749,7 @@ paths:
               - configurations
         - name: name
           in: query
-          description: Object id
+          description: 对象ID
           required: true
           schema:
             type: string
@@ -770,12 +770,12 @@ paths:
     post:
       tags:
         - xtags
-      summary: Create tags for specified object
+      summary: 创建标签
       operationId: createTags
       parameters:
         - name: object
           in: path
-          description: Object type
+          description: 对象类型
           required: true
           schema:
             type: string
@@ -785,13 +785,13 @@ paths:
               - configurations
         - name: name
           in: query
-          description: Object ID
+          description: 对象ID
           required: true
           schema:
             type: string
         - name: tags
           in: query
-          description: tags to remove
+          description: 标签列表
           required: true
           schema:
             type: array
@@ -816,12 +816,12 @@ paths:
     post:
       tags:
         - xtags
-      summary: Remove tags from object
+      summary: 删除标签
       operationId: removeTags
       parameters:
         - name: object
           in: path
-          description: Object Type
+          description: 对象类型
           required: true
           schema:
             type: string
@@ -831,13 +831,13 @@ paths:
               - configurations
         - name: name
           in: query
-          description: Object ID
+          description: 对象ID
           required: true
           schema:
             type: string
         - name: tags
           in: query
-          description: tags to remove
+          description: 标签列表
           required: true
           schema:
             type: array
@@ -861,12 +861,12 @@ paths:
     post:
       tags:
         - xtags
-      summary: Clear all tags from object
+      summary: 清楚标签
       operationId: clearTags
       parameters:
         - name: object
           in: path
-          description: Object Type
+          description: 对象类型
           required: true
           schema:
             type: string
@@ -876,7 +876,7 @@ paths:
               - configurations
         - name: name
           in: query
-          description: Object ID
+          description: 对象ID
           required: true
           schema:
             type: string
@@ -910,7 +910,7 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get user gateway list
+      summary: 获取网关列表
       operationId: listGateway
       responses:
         '200':
@@ -921,7 +921,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Add a new gateway device to your gateway list
+      summary: 绑定新网关
       operationId: addGateway
       requestBody:
         $ref: '#/components/requestBodies/GatewayNew'
@@ -934,7 +934,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Update gateway device information
+      summary: 更新网关信息
       operationId: updateGateway
       requestBody:
         $ref: '#/components/requestBodies/Gateway'
@@ -947,12 +947,12 @@ paths:
     get:
       tags:
         - gateways
-      summary: Query gateway infomration
+      summary: 获取网关信息
       operationId: queryGateway
       parameters:
         - name: name
           in: query
-          description: Gateway ID ( serial number )
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
@@ -966,12 +966,12 @@ paths:
     post:
       tags:
         - gateways
-      summary: Remove gateway from your gateway list
+      summary: 移除网关
       operationId: removeGateway
       parameters:
         - name: devices
           in: query
-          description: Gateway ID ( serial number )
+          description: 网关ID(序列号)
           required: true
           explode: true
           schema:
@@ -986,18 +986,18 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get output/command execution result
+      summary: 获取网关操作指令结果
       operationId: getGatewayDeviceExecutionResult
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
         - name: id
           in: query
-          description: Execution ID
+          description: 指令ID
           required: true
           schema:
             type: string
@@ -1010,12 +1010,12 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get application list
+      summary: 获取网关已安装应用列表
       operationId: listGatewayApplication
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
@@ -1028,18 +1028,18 @@ paths:
     get:
       tags:
         - gateways
-      summary: Refresh application list
+      summary: 刷新网关应用列表
       operationId: refreshGatewayApplication
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
         - name: id
           in: query
-          description: Execution ID for tracking result
+          description: 操作ID（用以跟踪执行结果）
           required: false
           schema:
             type: string
@@ -1052,7 +1052,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Install application to gateway
+      summary: 安装应用
       operationId: installGatewayApplication
       requestBody:
         content:
@@ -1062,22 +1062,22 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 inst:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 app:
                   type: string
-                  description: Application ID in store
+                  description: 应用ID(应用市场)
                 version:
                   type: integer
-                  description: Application version in store
+                  description: 应用版本
                 conf:
                   type: object
-                  description: Application Configuration object
+                  description: 应用配置
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1087,7 +1087,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Remove gateway application
+      summary: 删除应用
       operationId: removeGatewayApplication
       requestBody:
         content:
@@ -1097,13 +1097,13 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 inst:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1113,7 +1113,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Set configuration for application
+      summary: 更新应用配置
       operationId: setGatewayApplicationConf
       requestBody:
         content:
@@ -1123,16 +1123,16 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 inst:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 conf:
                   type: object
-                  description: Application Configuration object
+                  description: 应用配置
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1142,7 +1142,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Trigger application start to run
+      summary: 启动应用
       operationId: startGatewayApplication
       requestBody:
         content:
@@ -1152,13 +1152,13 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 int:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1168,7 +1168,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Trigger application stop from running
+      summary: 停止应用
       operationId: stopGatewayApplication
       requestBody:
         content:
@@ -1178,16 +1178,16 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 inst:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 reason:
                   type: string
                   description: Stop reason
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1197,7 +1197,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Upgrade the install application in gateway
+      summary: 更新应用
       operationId: upgradeGatewayApplication
       requestBody:
         content:
@@ -1207,22 +1207,22 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 inst:
                   type: string
-                  description: Application instance ID
+                  description: 应用实例ID
                 app:
                   type: string
-                  description: Application ID in store
+                  description: 应用ID(应用市场)
                 version:
                   type: integer
-                  description: Application version in store
+                  description: 应用版本
                 conf:
                   type: object
-                  description: Application Configuration object
+                  description: 应用配置
                 id:
                   type: string
-                  description: Execution ID for tracking result
+                  description: 操作ID（用以跟踪执行结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1232,12 +1232,12 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get beta mode information
+      summary: 获取Beta模式
       operationId: getGatewayBetaInfo
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
@@ -1250,7 +1250,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Enable beta mode
+      summary: 开启Beta模式
       operationId: enableBetaMode
       requestBody:
         content:
@@ -1260,7 +1260,7 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1270,12 +1270,12 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get devices objects in specified gateway
+      summary: 获取网关采集设备列表
       operationId: listGatewayDevices
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
@@ -1288,18 +1288,18 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get devices object detail information
+      summary: 获取网管采集设备详细信息
       operationId: listGatewayDevices
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
         - name: name
           in: query
-          description: Device ID
+          description: 设备ID
           required: true
           schema:
             type: string
@@ -1312,18 +1312,18 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get devices object input data information
+      summary: 获取网管采集设备中的输入项实时数据
       operationId: listGatewayDeviceInputs
       parameters:
         - name: gateway
           in: query
-          description: Gateway ID
+          description: 网关ID(序列号)
           required: true
           schema:
             type: string
         - name: name
           in: query
-          description: Device ID
+          description: 设备ID
           required: true
           schema:
             type: string
@@ -1336,7 +1336,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Set output prop value for sepecified device
+      summary: 设定设备输出项数据
       operationId: outputGatewayDeviceProp
       requestBody:
         content:
@@ -1346,22 +1346,22 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 name:
                   type: string
-                  description: Device ID
+                  description: 设备ID
                 output:
                   type: string
-                  description: Device output ID
+                  description: 设备输出项名称
                 prop:
                   type: string
-                  description: Device output property ID
+                  description: 设备输出项属性名称
                 value:
                   type: any
-                  description: Output value
+                  description: 输出数据
                 id:
                   type: string
-                  description: Execution ID for tracking the result
+                  description: 指令ID（用以跟踪结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1371,7 +1371,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Send command for sepecified device
+      summary: 发送设备指令
       operationId: commandGatewayDeviceProp
       requestBody:
         content:
@@ -1381,19 +1381,19 @@ paths:
               properties:
                 gateway:
                   type: string                
-                  description: Gateway ID ( serial number )
+                  description: 网关ID(序列号)
                 name:
                   type: string
-                  description: Device ID
+                  description: 设备ID
                 command:
                   type: string
-                  description: Device command ID
+                  description: 指令名称
                 param:
                   type: any
-                  description: Command parameters
+                  description: 指令参数
                 id:
                   type: string
-                  description: Execution ID for tracking the result
+                  description: 指令ID（用以跟踪结果）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1424,7 +1424,7 @@ paths:
     post:
       tags:
         - applications
-      summary: Create new application
+      summary: 创建新应用
       operationId: createApplication
       requestBody:
         $ref: '#/components/requestBodies/ApplicationNew'
@@ -1437,7 +1437,7 @@ paths:
     post:
       tags:
         - applications
-      summary: Update application icon image file
+      summary: 更新应用图标
       operationId: updateApplicationIcon
       requestBody:
         content:
@@ -1447,10 +1447,10 @@ paths:
                 file:
                   type: string
                   format: binary
-                  description: Application ICON file
+                  description: 图标文件
                 name:
                   type: string
-                  description: Application ID
+                  description: 应用ID(应用市场)
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1460,7 +1460,7 @@ paths:
     post:
       tags:
         - applications
-      summary: Update application information
+      summary: 更新应用信息
       operationId: updateApplicationInfo
       requestBody:
         $ref: '#/components/requestBodies/Application'
@@ -1473,12 +1473,12 @@ paths:
     get:
       tags:
         - applications
-      summary: Query applications infomration
+      summary: 获取应用详细信息
       operationId: queryApplicationInfo
       parameters:
         - name: name
           in: query
-          description: Application ID
+          description: 应用ID（应用市场）
           required: true
           schema:
             type: string
@@ -1492,12 +1492,12 @@ paths:
     post:
       tags:
         - applications
-      summary: Remove application
+      summary: 删除应用
       operationId: removeApplication
       parameters:
         - name: name
           in: query
-          description: Applicaton ID
+          description: 应用ID（应用市场）
           required: true
           explode: true
           schema:
@@ -1522,7 +1522,7 @@ paths:
     get:
       tags:
         - configurations
-      summary: Get user configuration list
+      summary: 用户配置（模板）列表
       operationId: listConfiguration
       responses:
         '200':
@@ -1533,7 +1533,7 @@ paths:
     post:
       tags:
         - configurations
-      summary: Create new configuration
+      summary: 创建应用配置（模板）
       operationId: createConfiguration
       requestBody:
         $ref: '#/components/requestBodies/ConfigurationNew'
@@ -1546,7 +1546,7 @@ paths:
     post:
       tags:
         - configurations
-      summary: Update application information
+      summary: 更新应用配置（模板）信息
       operationId: updateConfigurationINfo
       requestBody:
         $ref: '#/components/requestBodies/Configuration'
@@ -1559,12 +1559,12 @@ paths:
     get:
       tags:
         - configurations
-      summary: Query configuration infomration
+      summary: 获取应用配置（模板）信息
       operationId: queryConfigurationInfo
       parameters:
         - name: name
           in: query
-          description: Configuration ID
+          description: 配置（模板）ID
           required: true
           schema:
             type: string
@@ -1578,12 +1578,12 @@ paths:
     post:
       tags:
         - configurations
-      summary: Remove configurations
+      summary: 删除应用配置（模板）
       operationId: removeConfiguration
       parameters:
         - name: name
           in: query
-          description: Configuration ID
+          description: 配置（模板）ID
           required: true
           explode: true
           schema:
@@ -1608,7 +1608,7 @@ paths:
     get:
       tags:
         - companies
-      summary: Get user company list
+      summary: 公司列表
       operationId: listCompany
       responses:
         '200':
@@ -1619,7 +1619,7 @@ paths:
     post:
       tags:
         - companies
-      summary: Create new company
+      summary: 创建公司
       operationId: createCompany
       requestBody:
         $ref: '#/components/requestBodies/CompanyNew'
@@ -1632,7 +1632,7 @@ paths:
     post:
       tags:
         - companies
-      summary: Update company information
+      summary: 更新公司信息
       operationId: updateCompanyInfo
       requestBody:
         $ref: '#/components/requestBodies/Company'
@@ -1645,12 +1645,12 @@ paths:
     get:
       tags:
         - companies
-      summary: Query company infomration
+      summary: 查询公司信息
       operationId: queryCompanyInfo
       parameters:
         - name: name
           in: query
-          description: Company ID
+          description: 公司ID
           required: true
           schema:
             type: string
@@ -1663,12 +1663,12 @@ paths:
     post:
       tags:
         - companies
-      summary: Remove company
+      summary: 删除公司
       operationId: removeCompany
       parameters:
         - name: name
           in: query
-          description: Company ID
+          description: 公司ID
           required: true
           explode: true
           schema:
@@ -1692,7 +1692,7 @@ paths:
     get:
       tags:
         - pushers
-      summary: Get cloud pusher list
+      summary: 获取云发布列表
       operationId: listPusher
       responses:
         '200':
@@ -1703,7 +1703,7 @@ paths:
     post:
       tags:
         - pushers
-      summary: Create new pusher
+      summary: 创建新的云发布
       operationId: createPusher
       requestBody:
         $ref: '#/components/requestBodies/PusherNew'
@@ -1716,7 +1716,7 @@ paths:
     post:
       tags:
         - pushers
-      summary: Update pusher information
+      summary: 更新云发布信息
       operationId: updatePusherInfo
       requestBody:
         $ref: '#/components/requestBodies/Pusher'
@@ -1729,12 +1729,12 @@ paths:
     get:
       tags:
         - pushers
-      summary: Query pusher infomration
+      summary: 查询云发布
       operationId: queryPusherInfo
       parameters:
         - name: name
           in: query
-          description: Pusher ID
+          description: 云发布ID
           required: true
           schema:
             type: string
@@ -1747,12 +1747,12 @@ paths:
     post:
       tags:
         - pushers
-      summary: Remove pusher
+      summary: 删除云发布
       operationId: removePusher
       parameters:
         - name: name
           in: query
-          description: Pusher ID
+          description: 云发布ID
           required: true
           explode: true
           schema:
@@ -1766,7 +1766,7 @@ paths:
     get:
       tags:
         - batch_tasks
-      summary: Get gateway batch tasks list
+      summary: 获取设备批量任务列表
       operationId: listBatchTasks
       parameters: []
       responses:
@@ -1778,7 +1778,7 @@ paths:
     post:
       tags:
         - batch_tasks
-      summary: Create batch task
+      summary: 创建设备批量任务
       operationId: createBatchTask
       requestBody:
         content:
@@ -1788,19 +1788,19 @@ paths:
               properties:
                 task_name:
                   type: string                
-                  description: Task readable name
+                  description: 任务名称
                 description:
                   type: string
-                  description: Task description
+                  description: 任务描述
                 timeout:
                   type: integer
-                  description: Task run timeout
+                  description: 执行超时时间
                 script:
                   type: string
-                  description: Task script content
+                  description: 任务脚本内容
                 gateways:
                   type: array
-                  description: Gateway ID list
+                  description: 网关列表
                   items:
                     type: string
       responses:
@@ -1812,12 +1812,12 @@ paths:
     get:
       tags:
         - batch_tasks
-      summary: Get batch task information
+      summary: 获取设备批量任务详细信息
       operationId: getBatchTaskInfo
       parameters:
         - name: name
           in: query
-          description: Batch Task ID
+          description: 设备批量任务ID
           required: true
           schema:
             type: string
@@ -1830,7 +1830,7 @@ paths:
     post:
       tags:
         - batch_tasks
-      summary: Get Batch Task status
+      summary: 获取设备批量任务状态
       operationId: getBatchTaskStatus
       requestBody:
         content:
@@ -1840,10 +1840,10 @@ paths:
               properties:
                 name:
                   type: string
-                  description: Batch Task ID
+                  description: 设备批量任务ID
                 update:
                   type: boolean
-                  description: Trigger task status update if True, or only read the status.
+                  description: 是否触发任务状态更新.
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1853,11 +1853,11 @@ paths:
     get:
       tags:
         - store
-      summary: Get applications
+      summary: 获取应用列表
       operationId: getStoreApplicationList
       parameters:
         - name: name
-          description: Application ID    
+          description: 应用ID（应用市场）    
           required: true
           schema:
             type: array
@@ -1872,11 +1872,11 @@ paths:
     get:
       tags:
         - store
-      summary: Get application information
+      summary: 获取应用详情
       operationId: getStoreApplicationInfo
       parameters:
         - name: name
-          description: Application ID    
+          description: 应用ID（应用市场）    
           required: true
           schema:
             type: string
@@ -1889,12 +1889,12 @@ paths:
     get:
       tags:
         - store
-      summary: Get store operation object list 
+      summary: 获取应用讨论、评论、问题列表 
       operationId: listStoreOperationObjects
       parameters:
         - name: operation
           in: path
-          description: Operation type
+          description: 列表类型
           required: true
           schema:
             type: string
@@ -1904,7 +1904,7 @@ paths:
               - reviews
         - name: app
           in: query
-          description: Application ID
+          description: 应用ID（应用市场）
           required: true
           schema:
             type: string
@@ -1925,12 +1925,12 @@ paths:
     post:
       tags:
         - store
-      summary: Create store {operation} object
+      summary: 创建应用讨论、评论、问题
       operationId: createStoreOperationObject
       parameters:
         - name: operation
           in: path
-          description: Operation type
+          description: 类型
           required: true
           schema:
             type: string
@@ -1946,7 +1946,7 @@ paths:
               properties:
                 app:
                   type: string                
-                  description: Application id
+                  description: 应用ID（应用市场）
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1964,12 +1964,12 @@ paths:
     get:
       tags:
         - store
-      summary: Get store {operation} object information
+      summary: 获取应用讨论、评论、问题详情
       operationId: getStoreOperationObjectInformation
       parameters:
         - name: operation
           in: path
-          description: Operation type
+          description: 类型
           required: true
           schema:
             type: string
@@ -1979,7 +1979,7 @@ paths:
               - reviews
         - name: name
           in: query
-          description: Operation Object ID
+          description: 对象类型
           required: true
           schema:
             type: string
@@ -2000,12 +2000,12 @@ paths:
     post:
       tags:
         - store
-      summary: Update store operation object information
+      summary: 更新应用讨论、评论、问题
       operationId: updateStoreOperationObjectInformation
       parameters:
         - name: operation
           in: path
-          description: Operation type
+          description: 类型
           required: true
           schema:
             type: string
@@ -2021,7 +2021,7 @@ paths:
               properties:
                 name:
                   type: string                
-                  description: Operation Object id
+                  description: 对象ID
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -2039,12 +2039,12 @@ paths:
     post:
       tags:
         - store
-      summary: Remove store {operation} object
+      summary: 删除应用讨论、评论、问题
       operationId: removeStoreOperationObject
       parameters:
         - name: operation
           in: path
-          description: Operation type
+          description: 类型
           required: true
           schema:
             type: string
@@ -2054,7 +2054,7 @@ paths:
               - reviews
         - name: name
           in: query
-          description: Operation Object ID
+          description: 对象ID
           required: true
           schema:
             type: string
@@ -2141,123 +2141,130 @@ components:
       properties:
         name:
           type: string
-          description: 'Company id, the company short name'
+          description: '公司ID, 公司短名称'
     GatewayNew:
       type: object
       properties:
         device_name:
           type: string
-          description: Gateway device name specified by user.
+          description: 网关设备名称.
         description:
           type: string
-          description: Gateway device description sepcified by user.
+          description: 网关设备描述.
         owner_type:
           type: string
-          description: Owner type
+          description: 所有者类型
           enum:
             - User
             - Cloud Company Group
           default: User
         owner_id:
           type: string
-          description: Onwer ID
+          description: 所有者ID
     Gateway:
       type: object
       properties:
         name:
           type: string
-          description: Gateway device id (serial number).
+          description: 网关ID (序列号)
         sn:
           type: string
-          description: Gateway device serial number
+          description: 网关ID (序列号)
         device_name:
           type: string
-          description: Gateway device name specified by user.
+          description: 网关设备名称.
         description:
           type: string
-          description: Gateway device description sepcified by user.
+          description: 网关设备描述.
         enabled:
           type: integer
-          description: Gateway device enabled for not (0 is not)
+          description: 是否启用
           enum:
             - 0
             - 1
         company:
           type: string
-          description: Gateway device owner company name(id)
+          description: 网关设备所属公司名称
         owner_type:
           type: string
-          description: Gateway device owner type
+          description: 网关设备所有者类型
           enum:
             - User
             - Cloud Company Group
         owner_id:
           type: string
-          description: Gateway device owner id
+          description: 网关设备所有者ID
         longitude:
           type: string
         latitude:
           type: string
         device_status:
           type: string
-          description: Gateway device online status
+          description: 网关设备在线状态
           enum:
             - ONLINE
             - OFFLINE
         last_updated:
           type: string
           format: date-time
-          description: Last device updated time.
+          description: 上一次更新设备信息的时间
         use_beta:
           type: integer
-          description: Has device enabled beta mode or not
+          description: 设备是否可以启用Beta模式
         use_beta_start_time:
           type: string
           format: date-time
-          description: The beta mold enable time
+          description: 设备开启Beta模式的时间
     UserSignup:
       type: object
       properties:
         email:
           type: email
-          description: User email
+          description: 用户ID(邮箱)
         full_name:
           type: string
-          description: User fullname
+          description: 用户全名
     User:
       type: object
       properties:
         name:
           type: string
-          description: Username
+          description: 用户名
         csrf_token:
           type: string
           description: CSRF Token
         groups:
           type: array
-          description: Company Groups ID list
+          description: 所属公司员工组列表
         companies:
           type: array
-          description: Company ID list
+          description: 所属公司列表
         email:
           type: string
           format: email
+          description: 邮件地址
         password:
           type: string
+          description: 密码
         phone:
           type: string
+          description: 电话
         first_name:
           type: string
+          description: 名字
         last_name:
           type: string
+          description: 姓氏
     Tag:
       type: object
       properties:
         id:
           type: integer
           format: int64
+          description: 标签ID
         name:
           type: string
+          description: 标签名称
       xml:
         name: Tag
     ApplicationNew:
@@ -2265,38 +2272,38 @@ components:
       properties:
         app_name:
           type: string
-          description: Application Name.
+          description: 应用名称
         code_name:
           type: string
-          description: Application code name for pkg url.
+          description: 应用代码名称(英文字母，不包含特殊字符)
         has_conf_template:
           type: integer
-          description: Whether application has configruation template or not
+          description: 应用是否有配置模板
           enum:
             - 0
             - 1
         license_type:
           type: string
-          description: Licence type
+          description: 授权类型
           enum:
             - Open
             - Private
             - Close
         star:
           type: integer
-          description: Application star
+          description: 应用评星
         description:
           type: string
-          description: Application description
+          description: 应用描述(Markdown)
         conf_template:
           type: string
-          description: Application configuration template string(in json)
+          description: 应用配置模板说明(JSON)
         pre_configuration:
           type: string
-          description: Pre application configuration
+          description: 应用默认配置
         keywords:
           type: array
-          description: Application keywords
+          description: 应用标签
           items:
             type: string
     Application:
@@ -2304,70 +2311,70 @@ components:
       properties:
         name:
           type: string
-          description: Application ID
+          description: 应用ID（应用市场）
         app_name:
           type: string
-          description: Application Name.
+          description: 应用名称
         code_name:
           type: string
-          description: Application code name for pkg url.
+          description: 应用代码名称(英文字母，不包含特殊字符)
         has_conf_template:
           type: integer
-          description: Whether application has configruation template or not
+          description: 应用是否有配置模板
           enum:
             - 0
             - 1
         license_type:
           type: string
-          description: Licence type
+          description: 授权类型
           enum:
             - Open
             - Private
             - Close
         star:
           type: integer
-          description: Application star
+          description: 应用评星
         fork_from:
           type: string
-          description: Fork application ID
+          description: Fork 应用ID（应用市场）
         fork_version:
           type: integer
-          description: Fork version
+          description: Fork 版本
         description:
           type: string
-          description: Application description
+          description: 应用描述(Markdown)
         conf_template:
           type: string
-          description: Application configuration template string(in json)
+          description: 应用配置模板说明(JSON)
         pre_configuration:
           type: string
-          description: Pre application configuration
+          description: 应用默认配置
         icon_image:
           type: string
-          description: Icon image file url path.
+          description: 应用图标地址
         keywords:
           type: array
-          description: Application keywords
+          description: 应用标签
           items:
             type: string
         owner:
           type: string
-          description: Onwer ID
+          description: 所有者ID
     ConfigurationNew:
       type: object
       properties:
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         conf_name:
           type: string
-          description: Configuration name.
+          description: 配置（模板）名称
         description:
           type: string
-          description: Configuration description
+          description: 配置（模板）描述
         type:
           type: string
-          description: Configuration type
+          description: 配置（模板）类型
           enum:
             - Template
             - Configuration
@@ -2379,37 +2386,37 @@ components:
             - 1
         keywords:
           type: array
-          description: Application keywords
+          description: 标签
           items:
             type: string
         owner_type:
           type: string
-          description: Owner type
+          description: 所有者类型
           enum:
             - User
             - Cloud Company Group
           default: User
         owner_id:
           type: string
-          description: Onwer ID
+          description: 所有者ID
     Configuration:
       type: object
       properties:
         name:
           type: string
-          description: Configuration ID
+          description: 配置（模板）ID
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         conf_name:
           type: string
-          description: Configuration name.
+          description: 配置（模板）名称
         description:
           type: string
-          description: Configuration description
+          description: 配置（模板）描述
         type:
           type: string
-          description: Configuration type
+          description: 配置（模板）类型
           enum:
             - Template
             - Configuration
@@ -2421,101 +2428,101 @@ components:
             - 1
         keywords:
           type: array
-          description: Application keywords
+          description: 标签
           items:
             type: string
         owner_type:
           type: string
-          description: Owner type
+          description: 所有者类型
           enum:
             - User
             - Cloud Company Group
           default: User
         owner_id:
           type: string
-          description: Onwer ID
+          description: 所有者ID
         owner_company:
           type: string
-          description: Owner company id
+          description: 所属公司ID
     Activity:
       type: object
       properties:
         name:
           type: string
-          description: Activity ID
+          description: 事件ID
         subject:
           type: string
-          description: Activity Subject.
+          description: 事件标题.
         operation:
           type: string
-          description: Activity Operation type
+          description: 事件类型
           enum:
             - Owner
             - Status
             - Action
         status:
           type: string
-          description: Activity operation result
+          description: 事件结果（非执行结果）
           enum:
             - Success
             - Failed
         message:
           type: string
-          description: Activity detail message object in json.
+          description: 事件详细信息（JSON对象）
           items:
             type: string
         disposed:
           type: integer
-          description: Activity disposed
+          description: 事件是否已处理
           enum:
             - 0
             - 1
         disposed_by:
           type: string
-          description: The user who disposed this activity.
+          description: 处理者用户ID
         device:
           type: string
-          description: Gateway device id.
+          description: 网关设备ID(序列号)
         user:
           type: string
-          description: The user who generates this activity.
+          description: 事件触发者用户ID
         full_name:
           type: string
-          description: The user fullname
+          description: 事件触发者用户全称
         owner_type:
           type: string
-          description: Owner type
+          description: 所有者类型
           enum:
             - User
             - Cloud Company Group
           default: User
         owner_id:
           type: string
-          description: Onwer ID
+          description: 所有者ID
         owner_company:
           type: string
-          description: Owner company id
+          description: 所属公司ID
         creation:
           type: date-time
-          description: Activtity creation timestamp.
+          description: 事件发生时间
     Event:
       type: object
       properties:
         name:
           type: string
-          description: Event ID
+          description: 设备事件ID
         device:
           type: string
-          description: Gateway device id.
+          description: 网关设备ID(序列号)
         event_source:
           type: string
-          description: Event source device id.
+          description: 设备事件来源的设备ID
         event_level:
           type: integer
-          description: Event level.
+          description: 设备事件等级
         event_type:
           type: string
-          description: Event type
+          description: 设备事件类型
           enum:
             - SYS
             - DEV
@@ -2524,103 +2531,103 @@ components:
             - APP
         event_info:
           type: string
-          description: Event information.
+          description: 设备事件信息
           items:
             type: string
         event_data:
           type: string
-          description: Event data object in json.
+          description: 设备事件信息数据对象
         event_time:
           type: date-time
-          description: Event timestamp.
+          description: 设备事件时间戳
         disposed:
           type: integer
-          description: Activity disposed
+          description: 事件是否已处理
           enum:
             - 0
             - 1
         disposed_by:
           type: string
-          description: The user who disposed this activity.
+          description: 处理者用户ID
         owner_type:
           type: string
-          description: Owner type
+          description: 所有者类型
           enum:
             - User
             - Cloud Company Group
           default: User
         owner_id:
           type: string
-          description: Onwer ID
+          description: 所有者ID
         owner_company:
           type: string
-          description: Owner company id
+          description: 所属公司ID
     Pusher:
       type: object
       properties:
         name:
           type: string
-          description: Pusher ID
+          description: 云发布ID
         app_name:
           type: string
-          description: Pusher Application Name.
+          description: 云发布名称
         description:
           type: string
-          description: Pusher application description
+          description: 云发布描述
         uri:
           type: string
-          description: HTTP URI which receive the data push
+          description: 处理云发布中的HTTP请求服务器地址
         enabled:
           type: integer
-          description: Enable flag.
+          description: 是否启用
           enum:
             - 0
             - 1
         on_behalf:
           type: string
-          description: On behalf user id.
+          description: 代理用户
         device:
           type: integer
-          description: Enable this if Pusher application needs device information and any update
+          description: 是否发布设备信息，以及更新
           enum:
             - 0
             - 1
         device_event:
           type: integer
-          description: Enable this if Pusher application needs device events
+          description: 是否发布设备事件
           enum:
             - 0
             - 1
         device_data:
           type: integer
-          description: Enable this if Pusher application needs device data (by MQTT)
+          description: 是否通过MQTT协议发布设备数据
           enum:
             - 0
             - 1
         device_data_mqtt_host:
           type: string
-          description: Device data MQTT broker host
+          description: 处理设备数据的MQTT Broker地址
         device_data_mqtt_user:
           type: string
-          description: Device data MQTT broker login username
+          description: 处理设备数据的MQTT Broker用户名
         device_data_mqtt_passwd:
           type: string
-          description: Device data MQTT broker login password
+          description: 处理设备数据的MQTT Broker密码
     Batch_Task_New:
       type: object
       properties:
         task_name:
           type: string
-          description: Batch Task Name.
+          description: 批量任务名称
         timeout:
           type: integer
-          description: Batch script run timeout in seconds.
+          description: 批量任务超时时间（seconds）
         task_description:
           type: string
-          description: Batch task description
+          description: 批量任务描述
         batch_script:
           type: string
-          description: Batch task script content.
+          description: 批量任务脚本内容
         device_list:
           type: array
           items:
@@ -2630,19 +2637,19 @@ components:
       properties:
         name:
           type: string
-          description: Batch Task ID
+          description: 设备批量任务ID
         task_name:
           type: string
-          description: Batch Task Name.
+          description: 批量任务名称
         timeout:
           type: integer
-          description: Batch script run timeout in seconds.
+          description: 批量任务超时时间（seconds）
         owner_id:
           type: string
-          description: Batch task creator id.
+          description: 批量任务所有者ID
         status:
           type: string
-          description: Batch task status.
+          description: 任务状态
           enum:
             - New
             - Running
@@ -2651,26 +2658,26 @@ components:
             - Partial
         task_description:
           type: string
-          description: Batch task description
+          description: 批量任务描述
         batch_script:
           type: string
-          description: Batch task script content.
+          description: 批量任务脚本内容
         device_list:
           type: array
           items:
             $ref: '#/components/schemas/Batch_Task_Device'
         creation:
           type: date-time
-          description: Task creation timestamp.
+          description: 任务创建时间
     Batch_Task_Device:
       type: object
       properties:
         device:
           type: string
-          description: Batch Task Device ID.
+          description: 批量任务设备ID.
         status:
           type: string
-          description: Batch task status.
+          description: 任务状态
           enum:
             - New
             - Running
@@ -2679,142 +2686,142 @@ components:
             - Partial
         info:
           type: string
-          description: Task execution result infomration.
+          description: 任务执行结果信息
         action_id:
           type: string
-          description: Task execution id.
+          description: 任务执行跟踪ID
         action_starttime:
           type: date-time
-          description: Task execution start time.
+          description: 任务开始执行时间
     StoreAppCommentNew:
       type: object
       properties:
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         comment:
           type: string
-          description: Comment message.
+          description: 评论内容
         reply_to:
           type: string
-          description: Comment reply to.
+          description: 评论回复ID
         creation:
           type: date-time
-          description: Comment creation timestamp.
+          description: 评论创建时间
     StoreAppComment:
       type: object
       properties:
         name:
           type: string
-          description: Comment ID.
+          description: 评论ID
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         comment:
           type: string
-          description: Comment message.
+          description: 评论内容
         reply_to:
           type: string
-          description: Comment reply to.
+          description: 评论回复ID
         creation:
           type: date-time
-          description: Comment creation timestamp.
+          description: 评论创建时间
     StoreAppReviewNew:
       type: object
       properties:
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         title:
           type: string
-          description: Review title.
+          description: 应用评价标题
         star:
           type: integer
-          description: Review star.
+          description: 评星
         content:
           type: string
-          description: Review content.
+          description: 应用评价内容
         comments:
           type: array
-          description: Review Comment.
+          description: 应用评价评论列表
     StoreAppReview:
       type: object
       properties:
         name:
           type: string
-          description: Comment ID.
+          description: 应用评价ID
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         title:
           type: string
-          description: Review title.
+          description: 应用评价标题
         star:
           type: integer
-          description: Review star.
+          description: 评星
         content:
           type: string
-          description: Review content.
+          description: 应用评价内容
         comments:
           type: array
-          description: Review Comment.
+          description: 应用评价评论列表
         creation:
           type: date-time
-          description: Comment creation timestamp.
+          description: 应用评价评论创建时间
     StoreAppIssueNew:
       type: object
       properties:
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         title:
           type: string
-          description: Issue title.
+          description: 问题标题
         priority:
           type: string
-          description: Issue priority.
+          description: 问题等级
           enum:
             - Low
             - Middle
             - High
         content:
           type: string
-          description: Issue content.
+          description: 问题描述内容
     StoreAppIssue:
       type: object
       properties:
         name:
           type: string
-          description: Issue ID.
+          description: 应用问题ID
         app:
           type: string
-          description: Application ID.
+          description: 应用ID（应用市场）.
         title:
           type: string
-          description: Issue title.
+          description: 问题标题
         status:
           type: string
-          description: Issue status.
+          description: 问题状态
           enum:
             - Open
             - Closed
             - Invalid
         priority:
           type: string
-          description: Issue priority.
+          description: 问题等级
           enum:
             - Low
             - Middle
             - High
         content:
           type: string
-          description: Issue content.
+          description: 问题描述内容
         comments:
           type: array
-          description: Issue Comment.
+          description: 问题评论列表
         creation:
           type: date-time
-          description: Comment creation timestamp.
+          description: 问题创建时间
   requestBodies:
     UserSignup:
       content:
