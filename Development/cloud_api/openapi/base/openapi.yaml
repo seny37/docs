@@ -1857,6 +1857,7 @@ paths:
       operationId: getStoreApplicationList
       parameters:
         - name: name
+          in: query
           description: Application ID    
           required: true
           schema:
@@ -1876,6 +1877,7 @@ paths:
       operationId: getStoreApplicationInfo
       parameters:
         - name: name
+          in: query
           description: Application ID    
           required: true
           schema:
@@ -2136,12 +2138,51 @@ components:
       properties:
         exc:
           type: string
+    CompanyNew:
+      type: object
+      properties:
+        comp_name:
+          type: string
+          description: company short name
+        full_name:
+          type: string
+          description: Company full name
+        domain:
+          type: domain
+          description: Company domain
+        admin:
+          type: email
+          description: Admin user id
+        address:
+          type: string
+          description: Company address infomration
+        contact:
+          type: string
+          description: Contact information
     Company:
       type: object
       properties:
         name:
           type: string
-          description: 'Company id, the company short name'
+          description: Company id, the company short name
+        comp_name:
+          type: string
+          description: company short name
+        full_name:
+          type: string
+          description: Company full name
+        domain:
+          type: domain
+          description: Company domain
+        admin:
+          type: email
+          description: Admin user id
+        address:
+          type: string
+          description: Company address infomration
+        contact:
+          type: string
+          description: Contact information
     GatewayNew:
       type: object
       properties:
@@ -2555,6 +2596,54 @@ components:
         owner_company:
           type: string
           description: Owner company id
+    PusherNew:
+      type: object
+      properties:
+        app_name:
+          type: string
+          description: Pusher Application Name.
+        description:
+          type: string
+          description: Pusher application description
+        uri:
+          type: string
+          description: HTTP URI which receive the data push
+        enabled:
+          type: integer
+          description: Enable flag.
+          enum:
+            - 0
+            - 1
+        on_behalf:
+          type: string
+          description: On behalf user id.
+        device:
+          type: integer
+          description: Enable this if Pusher application needs device information and any update
+          enum:
+            - 0
+            - 1
+        device_event:
+          type: integer
+          description: Enable this if Pusher application needs device events
+          enum:
+            - 0
+            - 1
+        device_data:
+          type: integer
+          description: Enable this if Pusher application needs device data (by MQTT)
+          enum:
+            - 0
+            - 1
+        device_data_mqtt_host:
+          type: string
+          description: Device data MQTT broker host
+        device_data_mqtt_user:
+          type: string
+          description: Device data MQTT broker login username
+        device_data_mqtt_passwd:
+          type: string
+          description: Device data MQTT broker login password
     Pusher:
       type: object
       properties:
@@ -2846,6 +2935,46 @@ components:
               $ref: '#/components/schemas/User'
       description: List of user object
       required: true
+    ApplicationNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationNew'
+    Application:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Application'
+    ConfigurationNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConfigurationNew'
+    Configuration:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Configuration'
+    CompanyNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyNew'
+    Company:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company'
+    PusherNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PusherNew'
+    Pusher:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pusher'
   responses:
     ApiResponse:
       description: successful operation

@@ -2136,12 +2136,51 @@ components:
       properties:
         exc:
           type: string
+    CompanyNew:
+      type: object
+      properties:
+        comp_name:
+          type: string
+          description: 公司简称
+        full_name:
+          type: string
+          description: 公司全称
+        domain:
+          type: domain
+          description: 公司域名
+        admin:
+          type: email
+          description: 管理员用户名
+        address:
+          type: string
+          description: 地址信息
+        contact:
+          type: string
+          description: 联系人信息
     Company:
       type: object
       properties:
         name:
           type: string
-          description: '公司ID, 公司短名称'
+          description: 公司ID,同公司短名称
+        comp_name:
+          type: string
+          description: 公司简称
+        full_name:
+          type: string
+          description: 公司全称
+        domain:
+          type: domain
+          description: 公司域名
+        admin:
+          type: email
+          description: 管理员用户名
+        address:
+          type: string
+          description: 地址信息
+        contact:
+          type: string
+          description: 联系人信息
     GatewayNew:
       type: object
       properties:
@@ -2562,6 +2601,54 @@ components:
         owner_company:
           type: string
           description: 所属公司ID
+    PusherNew:
+      type: object
+      properties:
+        app_name:
+          type: string
+          description: 云发布名称
+        description:
+          type: string
+          description: 云发布描述
+        uri:
+          type: string
+          description: 处理云发布中的HTTP请求服务器地址
+        enabled:
+          type: integer
+          description: 是否启用
+          enum:
+            - 0
+            - 1
+        on_behalf:
+          type: string
+          description: 代理用户
+        device:
+          type: integer
+          description: 是否发布设备信息，以及更新
+          enum:
+            - 0
+            - 1
+        device_event:
+          type: integer
+          description: 是否发布设备事件
+          enum:
+            - 0
+            - 1
+        device_data:
+          type: integer
+          description: 是否通过MQTT协议发布设备数据
+          enum:
+            - 0
+            - 1
+        device_data_mqtt_host:
+          type: string
+          description: 处理设备数据的MQTT Broker地址
+        device_data_mqtt_user:
+          type: string
+          description: 处理设备数据的MQTT Broker用户名
+        device_data_mqtt_passwd:
+          type: string
+          description: 处理设备数据的MQTT Broker密码
     Pusher:
       type: object
       properties:
@@ -2853,6 +2940,46 @@ components:
               $ref: '#/components/schemas/User'
       description: List of user object
       required: true
+    ApplicationNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationNew'
+    Application:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Application'
+    ConfigurationNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConfigurationNew'
+    Configuration:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Configuration'
+    CompanyNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyNew'
+    Company:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Company'
+    PusherNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/PusherNew'
+    Pusher:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/Pusher'
   responses:
     ApiResponse:
       description: successful operation
