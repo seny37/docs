@@ -1025,7 +1025,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /gateways.applications.refresh:
-    get:
+    post:
       tags:
         - gateways
       summary: 刷新网关应用列表
@@ -1589,7 +1589,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /applications.versions.latest:
-    post:
+    get:
       tags:
         - applications
       summary: 获取应用最新版本
@@ -1786,7 +1786,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /configurations.versions.latest:
-    post:
+    get:
       tags:
         - configurations
       summary: 获取应用配置（模板）最新版本

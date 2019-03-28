@@ -1025,7 +1025,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /gateways.applications.refresh:
-    get:
+    post:
       tags:
         - gateways
       summary: Refresh application list
@@ -1589,7 +1589,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /applications.versions.latest:
-    post:
+    get:
       tags:
         - applications
       summary: Get application latest version
@@ -1786,7 +1786,7 @@ paths:
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
   /configurations.versions.latest:
-    post:
+    get:
       tags:
         - configurations
       summary: Get configuration latest version
