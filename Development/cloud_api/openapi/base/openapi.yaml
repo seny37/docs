@@ -1508,6 +1508,105 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.versions.test:
+    post:
+      tags:
+        - applications
+      summary: Check whether the api is available or not
+      operationId: apiApplicationVersionTest
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+      parameters: []
+  /applications.versions.list:
+    get:
+      tags:
+        - applications
+      summary: Get application version list
+      operationId: listApplicationVersions
+      parameters:
+        - name: app
+          in: query
+          description: Applicaton ID
+          schema:
+            type: string
+            default: APP00000001
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.versions.create:
+    post:
+      tags:
+        - applications
+      summary: Create new application version
+      operationId: createApplicationVresion
+      requestBody:
+        $ref: '#/components/requestBodies/ApplicationVersionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.versions.read:
+    get:
+      tags:
+        - applications
+      summary: Query application version infomration
+      operationId: queryApplicationVersionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Application Version ID
+          required: true
+          schema:
+            type: string
+            default: APP00000001.3
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.versions.remove:
+    post:
+      tags:
+        - applications
+      summary: Remove application version
+      operationId: removeApplicationVersion
+      parameters:
+        - name: name
+          in: query
+          description: Applicaton Version ID
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: APP00000001.3
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.versions.latest:
+    post:
+      tags:
+        - applications
+      summary: Get application latest version
+      operationId: getApplicationVersionLatest
+      parameters:
+        - name: app
+          in: query
+          description: Applicaton ID
+          required: true
+          schema:
+            type: string
+            default: APP00000001
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /configurations.test:
     post:
       tags:
@@ -1524,6 +1623,18 @@ paths:
         - configurations
       summary: Get user configuration list
       operationId: listConfiguration
+      parameters:
+        - name: conf_type
+          in: query
+          description: Configuration Type
+          required: false
+          schema:
+            type: string
+            default: Template
+            enum:
+              - Template
+              - Configuration
+              - Other
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1589,6 +1700,105 @@ paths:
           schema:
             type: string
             default: CNF0000000001
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /configurations.versions.test:
+    post:
+      tags:
+        - applications
+      summary: Check whether the api is available or not
+      operationId: apiConfigurationVersionTest
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+      parameters: []
+  /configurations.versions.list:
+    get:
+      tags:
+        - configurations
+      summary: Get configuration version list
+      operationId: listConfigurationVersions
+      parameters:
+        - name: conf
+          in: query
+          description: Configuration ID
+          schema:
+            type: string
+            default: CNF00000001
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /configurations.versions.create:
+    post:
+      tags:
+        - configurations
+      summary: Create new configuration version
+      operationId: createApplicationVresion
+      requestBody:
+        $ref: '#/components/requestBodies/ConfigurationVersionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /configurations.versions.read:
+    get:
+      tags:
+        - configurations
+      summary: Query configuration version infomration
+      operationId: queryConfigurationVersionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Configuration Version ID
+          required: true
+          schema:
+            type: string
+            default: CNF00000001.3
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /configurations.versions.remove:
+    post:
+      tags:
+        - configurations
+      summary: Remove configuration version
+      operationId: removeConfigurationVersion
+      parameters:
+        - name: name
+          in: query
+          description: Configuration Version ID
+          required: true
+          explode: true
+          schema:
+            type: string
+            default: CNF00000001.3
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /configurations.versions.latest:
+    post:
+      tags:
+        - configurations
+      summary: Get configuration latest version
+      operationId: getConfigurationVersionLatest
+      parameters:
+        - name: app
+          in: query
+          description: Configuration ID
+          required: true
+          schema:
+            type: string
+            default: CNF00000001
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1856,14 +2066,12 @@ paths:
       summary: Get applications
       operationId: getStoreApplicationList
       parameters:
-        - name: name
+        - name: owner
           in: query
-          description: Application ID    
-          required: true
+          description: Application Owner ID    
+          required: false
           schema:
-            type: array
-            items:
-              type: string
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1882,6 +2090,62 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /store.configurations.list:
+    get:
+      tags:
+        - store
+      summary: Get store configuration list
+      operationId: listStoreConfiguration
+      parameters:
+        - name: app
+          in: query
+          description: Applicaton ID
+          required: false
+          schema:
+            type: string
+            default: APP00000001
+        - name: conf_type
+          in: query
+          description: Configuration Type
+          required: false
+          schema:
+            type: string
+            default: Template
+            enum:
+              - Template
+              - Configuration
+              - Other
+        - name: owner
+          in: query
+          description: Configuration owner
+          required: false
+          schema:
+            type: string
+            default: xxx@xx.com
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /store.configurations.read:
+    get:
+      tags:
+        - store
+      summary: Get configruation information
+      operationId: getStoreConfigurationInfo
+      parameters:
+        - name: name
+          in: query
+          description: Configuration ID    
+          required: true
+          schema:
+            type: string
+            default: CNF00000001
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -2283,22 +2547,29 @@ components:
         email:
           type: string
           format: email
+          description: 邮件地址
         password:
           type: string
+          description: 密码
         phone:
           type: string
+          description: 电话
         first_name:
           type: string
+          description: 名字
         last_name:
           type: string
+          description: 姓氏
     Tag:
       type: object
       properties:
         id:
           type: integer
           format: int64
+          description: 标签ID
         name:
           type: string
+          description: 标签名称
       xml:
         name: Tag
     ApplicationNew:
@@ -2394,6 +2665,45 @@ components:
         owner:
           type: string
           description: Onwer ID
+    ApplicationVersionNew:
+      type: object
+      properties:
+        app:
+          type: string
+          description: Application ID.
+        version:
+          type: integer
+          description: Version Number
+        comment:
+          type: string
+          description: Version Comment
+        app_file:
+          type: string
+          description: Application Version File (in zip)
+    ApplicationVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Application Version ID.
+        app:
+          type: string
+          description: Application ID.
+        version:
+          type: integer
+          description: Version Number
+        comment:
+          type: string
+          description: Version Comment
+        app_name:
+          type: string
+          description: Application Name
+        beta:
+          type: integer
+          description: Version is beta or not
+          enum:
+            - 0
+            - 1
     ConfigurationNew:
       type: object
       properties:
@@ -2478,6 +2788,45 @@ components:
         owner_company:
           type: string
           description: Owner company id
+    ConfigurationVersionNew:
+      type: object
+      properties:
+        conf:
+          type: string
+          description: Configruation ID.
+        version:
+          type: integer
+          description: Version Number
+        comment:
+          type: string
+          description: Version Comment
+        data:
+          type: string
+          description: Configuration Version Content Data
+    ConfigurationVersion:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Configruation Version ID.
+        conf:
+          type: string
+          description: Configruation ID.
+        version:
+          type: integer
+          description: Version Number
+        comment:
+          type: string
+          description: Version Comment
+        app_name:
+          type: string
+          description: Application Name
+        app_conf_name:
+          type: string
+          description: Application Configuration Name
+        data:
+          type: string
+          description: Configuration Version Content Data
     Activity:
       type: object
       properties:
@@ -2945,6 +3294,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Application'
+    ApplicationVersionNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationVersionNew'
+    ApplicationVersion:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ApplicationVersion'
     ConfigurationNew:
       content:
         application/json:
@@ -2955,6 +3314,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Configuration'
+    ConfigurationVersionNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConfigurationVersionNew'
+    ConfigurationVersion:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/ConfigurationVersion'
     CompanyNew:
       content:
         application/json:
