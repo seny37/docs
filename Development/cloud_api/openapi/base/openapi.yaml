@@ -1261,6 +1261,14 @@ paths:
                 gateway:
                   type: string                
                   description: Gateway ID ( serial number )
+                beta:
+                  description: Enable beta or not
+                  required: true
+                  type: integer
+                  default: 1
+                  enum:
+                    - 0
+                    - 1
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'

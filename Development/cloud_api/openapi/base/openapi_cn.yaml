@@ -1261,6 +1261,14 @@ paths:
                 gateway:
                   type: string                
                   description: 网关ID(序列号)
+                beta:
+                  description: 开启或关闭Beta模式
+                  required: true
+                  type: integer
+                  default: 1
+                  enum:
+                    - 0
+                    - 1
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
