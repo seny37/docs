@@ -1602,6 +1602,16 @@ paths:
           schema:
             type: string
             default: APP00000001
+        - name: beta
+          in: query
+          description: Beta Version included or not
+          required: true
+          schema:
+            type: integer
+            default: 0
+            enum:
+              - 0
+              - 1
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
