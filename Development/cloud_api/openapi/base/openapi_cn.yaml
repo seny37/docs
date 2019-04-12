@@ -537,12 +537,19 @@ paths:
               - user
               - companies
               - gateways
-        - name: name
-          in: query
-          description: 平台事件归属ID
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                activities:
+                  type: list
+                disponsed:
+                  type: integer
+                  enum:
+                    - 0
+                    - 1
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -710,12 +717,19 @@ paths:
               - user
               - companies
               - gateways
-        - name: name
-          in: query
-          description: 事件ID
-          required: true
-          schema:
-            type: string
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                events:
+                  type: list
+                disponsed:
+                  type: integer
+                  enum:
+                    - 0
+                    - 1
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -995,10 +1009,488 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.upgrade:
+    post:
+      tags:
+        - gateways
+      summary: 升级网关软件版本
+      operationId: upgradeGatwaySoftware
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: version
+          in: query
+          description: FreeIOE 版本
+          required: true
+          schema:
+            type: integer
+        - name: skynet_version
+          in: query
+          description: Skynet 版本
+          required: true
+          schema:
+            type: integer
+        - name: no_ack
+          in: query
+          description: 是否会进行手工升级确认
+          required: true
+          schema:
+            type: integer
+            default: 1
+            enum:
+              - 0
+              - 1
         - name: id
           in: query
-          description: 指令ID
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.upgrade_ack:
+    post:
+      tags:
+        - gateways
+      summary: Upgrade gateway freeioe version acknowledgment
+      operationId: upgradeGatwaySoftwareAck
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
           required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_data:
+    post:
+      tags:
+        - gateways
+      summary: 开启数据上送(至冬笋云)
+      operationId: enableGatewayDataUpload
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: enable
+          in: query
+          description: 启用或停用
+          required: true
+          schema:
+            type: integer
+            default: 1
+            enum:
+              - 0
+              - 1
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_data_one_short:
+    post:
+      tags:
+        - gateways
+      summary: 临时开启数据上送(至冬笋云).
+      operationId: enableGatewayDataUploadOnShort
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: duration
+          in: query
+          description: 时间长度(秒)
+          required: true
+          schema:
+            type: integer
+            default: 60
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.data_snapshot:
+    post:
+      tags:
+        - gateways
+      summary: 强制数据快照更新.
+      operationId: fireGatewayDataSnapshot
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.data_flush:
+    post:
+      tags:
+        - gateways
+      summary: 强制上送缓存的数据（用以在周期上送期间，强制上传).
+      operationId: flushGatewayData
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_log:
+    post:
+      tags:
+        - gateways
+      summary: 要求上送设备日志.
+      operationId: enableGatewayLogUpload
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: duration
+          in: query
+          description: 时间长度(秒)
+          required: true
+          schema:
+            type: integer
+            default: 60
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_comm:
+    post:
+      tags:
+        - gateways
+      summary: 要求设备上送报文数据.
+      operationId: enableGatewayCommUpload
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: duration
+          in: query
+          description: 时间长度(秒)
+          required: true
+          schema:
+            type: integer
+            default: 60
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_stat:
+    post:
+      tags:
+        - gateways
+      summary: 开始网关设备上送分析数据(端口收发字节数等等).
+      operationId: enableGatewayStatUpload
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: enable
+          in: query
+          description: 启用或停用
+          required: true
+          schema:
+            type: integer
+            default: 1
+            enum:
+              - 0
+              - 1
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.enable_event:
+    post:
+      tags:
+        - gateways
+      summary: 设定事件上送等级（最小）
+      operationId: enableGatewayEventUpload
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: min_level
+          in: query
+          description: 最小上传等级 (负数禁止所有上传)
+          required: true
+          schema:
+            type: integer
+            default: 1
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.run_batch_script:
+    post:
+      tags:
+        - gateways
+      summary: 执行批量任务脚本(安装，删除，升级应用等等)
+      operationId: gatewayRunBatchScript
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: script
+          in: query
+          description: 批量任务脚本
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.restart:
+    post:
+      tags:
+        - gateways
+      summary: 重启 FreeIOE (只重启软件)
+      operationId: restartGatewayFreeIOE
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.reboot:
+    post:
+      tags:
+        - gateways
+      summary: 设备重启
+      operationId: rebootGatewayHardware
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.cloud_conf:
+    post:
+      tags:
+        - gateways
+      summary: 修改云配置项
+      operationId: updateCloudConfGateway
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: data
+          in: query
+          description: '配置数据 data example: {"ID": "IDIDIDIDIDID", "HOST": "ioe.symgrid.com", ...} Valid keys: ID/CLOUD_ID/HOST/PORT/TIMEOUT/PKG_HOST_URL/CNF_HOST_URL/DATA_UPLOAD/DATA_UPLOAD_PERIOD/COV/COV_TTL)'
+          required: true
+          schema:
+            type: object
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.download_cfg:
+    post:
+      tags:
+        - gateways
+      summary: N/A
+      operationId: downoadGatewayConfigurations
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: cfg_name
+          in: query
+          description: 配置唯一名称
+          required: true
+          schema:
+            type: string
+        - name: host
+          in: query
+          description: 配置服务器地址
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.upload_cfg:
+    post:
+      tags:
+        - gateways
+      summary: N/A
+      operationId: uploadGatewayConfigurations
+      parameters:
+        - name: name
+          in: query
+          description: 网关 ID
+          required: true
+          schema:
+            type: string
+        - name: host
+          in: query
+          description: 配置服务器地址
+          required: true
+          schema:
+            type: string
+        - name: id
+          in: query
+          description: 指令 ID
+          required: false
           schema:
             type: string
       responses:
@@ -1193,6 +1685,35 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.restart:
+    post:
+      tags:
+        - gateways
+      summary: Trigger application restart
+      operationId: restartGatewayApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                reason:
+                  type: string
+                  description: Stop reason
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /gateways.applications.upgrade:
     post:
       tags:
@@ -1223,6 +1744,150 @@ paths:
                 id:
                   type: string
                   description: 操作ID（用以跟踪执行结果）
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.query_log:
+    post:
+      tags:
+        - gateways
+      summary: Query buffered application log and upload to cloud
+      operationId: queryGatwayApplicationLog
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.query_comm:
+    post:
+      tags:
+        - gateways
+      summary: Query buffered application communication stream data and upload to cloud
+      operationId: queryGatwayApplicationComm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.upload_comm:
+    post:
+      tags:
+        - gateways
+      summary: Upload application communication stream data to cloud
+      operationId: uploadGatwayApplicationComm
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                sec:
+                  type: string
+                  description: Duration in seconds
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.option:
+    post:
+      tags:
+        - gateways
+      summary: Update application option/setings
+      operationId: optionatwayApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                option:
+                  type: string
+                  description: Option key. e.g 'auto'
+                  default: auto
+                value:
+                  type: string
+                  description: Option Value
+                  default: 1
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.applications.rename:
+    post:
+      tags:
+        - gateways
+      summary: Update application option/setings
+      operationId: optionatwayApplication
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                inst:
+                  type: string
+                  description: 应用实例 ID
+                new_name:
+                  type: string
+                  description: 新应用实例 ID
+                id:
+                  type: string
+                  description: 指令 ID for tracking result
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -1340,6 +2005,32 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.devices.data_query:
+    post:
+      tags:
+        - gateways
+      summary: 查询设备数据（选择不上传设备数据时）
+      operationId: dataQueryGatewayDevice
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                name:
+                  type: string
+                  description: Device ID
+                id:
+                  type: string
+                  description: 指令 ID for tracking the result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /gateways.devices.output:
     post:
       tags:
@@ -1401,7 +2092,74 @@ paths:
                   description: 指令参数
                 id:
                   type: string
-                  description: 指令ID（用以跟踪结果）
+                  description: 操作ID（用以跟踪执行结果）
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.extensions.list:
+    get:
+      tags:
+        - gateways
+      summary: List all installed extension from gateway
+      operationId: listGatewayInstalledExts
+      parameters:
+        - name: gateway
+          in: query
+          description: 网关 ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.extensions.refresh:
+    post:
+      tags:
+        - gateways
+      summary: Refresh all installed extension list
+      operationId: listGatewayInstalledExts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                id:
+                  type: string
+                  description: 指令 ID for tracking the result
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /gateways.extensions.upgrade:
+    post:
+      tags:
+        - gateways
+      summary: Refresh all installed extension list
+      operationId: listGatewayInstalledExts
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                gateway:
+                  type: string                
+                  description: 网关 ID ( serial number )
+                extension:
+                  type: string                
+                  description: Extension ID
+                version:
+                  type: string                
+                  description: Extension Version
+                id:
+                  type: string
+                  description: 指令 ID for tracking the result
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
