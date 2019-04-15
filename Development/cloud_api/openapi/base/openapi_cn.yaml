@@ -520,12 +520,12 @@ paths:
                 enum: 
                   - exception
                   - has_no_permission
-  /{category}.activities.disponse:
+  /{category}.activities.dispose:
     post:
       tags:
         - activities
       summary: 设定已处理标记
-      operationId: disponseActivity
+      operationId: disposeActivity
       parameters:
         - name: category
           in: path
@@ -545,7 +545,7 @@ paths:
               properties:
                 activities:
                   type: list
-                disponsed:
+                disposed:
                   type: integer
                   enum:
                     - 0
@@ -700,12 +700,12 @@ paths:
                 enum: 
                   - exception
                   - has_no_permission
-  /{category}.event.disponse:
+  /{category}.event.dispose:
     post:
       tags:
         - events
       summary: 设定已处理标记
-      operationId: disponseEvent
+      operationId: disposeEvent
       parameters:
         - name: category
           in: path
@@ -725,7 +725,7 @@ paths:
               properties:
                 events:
                   type: list
-                disponsed:
+                disposed:
                   type: integer
                   enum:
                     - 0
