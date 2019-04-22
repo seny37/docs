@@ -42,6 +42,8 @@ tags:
     description: Cloud Pushers
   - name: store
     description: Cloud Application Store
+  - name: developers
+    description: Application developer
   - name: xtags
     description: Object tags
 paths:
@@ -3113,6 +3115,61 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /developers.list:
+    get:
+      tags:
+        - developers
+      summary: Get application developer list
+      operationId: listDeveloper
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.create:
+    post:
+      tags:
+        - developers
+      summary: Create new developer
+      operationId: createDeveloper
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.update:
+    post:
+      tags:
+        - developers
+      summary: Update developer information
+      operationId: updateDeveloperInfo
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloper'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.read:
+    get:
+      tags:
+        - developers
+      summary: Query developer infomration
+      operationId: queryDeveloperInfo
+      parameters:
+        - name: name
+          in: query
+          description: Developer ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
 externalDocs:
   description: See ThingsRoot API example
   url: 'https://thingsroot.com/api/example.html'
@@ -3323,29 +3380,29 @@ components:
         email:
           type: string
           format: email
-          description: 邮件地址
+          description: email address
         password:
           type: string
-          description: 密码
+          description: password
         phone:
           type: string
-          description: 电话
+          description: phone number
         first_name:
           type: string
-          description: 名字
+          description: first name
         last_name:
           type: string
-          description: 姓氏
+          description: last name
     Tag:
       type: object
       properties:
         id:
           type: integer
           format: int64
-          description: 标签ID
+          description: tag id
         name:
           type: string
-          description: 标签名称
+          description: tag name
       xml:
         name: Tag
     ApplicationNew:
@@ -4029,6 +4086,52 @@ components:
         creation:
           type: date-time
           description: Comment creation timestamp.
+    AppDeveloperNew:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: Developer Nickname.
+        group:
+          type: string
+          description: Developer Group.
+          enum:
+            - Normal
+            - Power
+            - Admin
+        enabled:
+          type: integer
+          description: Enable flag.
+          default: 1
+          enum:
+            - 0
+            - 1
+    AppDeveloper:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Developer user id.
+        user:
+          type: string
+          description: Developer user id.
+        nickname:
+          type: string
+          description: Developer Nickname.
+        group:
+          type: string
+          description: Developer Group.
+          enum:
+            - Normal
+            - Power
+            - Admin
+        enabled:
+          type: integer
+          description: Enable flag.
+          default: 1
+          enum:
+            - 0
+            - 1
   requestBodies:
     UserSignup:
       content:
@@ -4120,6 +4223,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Pusher'
+    AppDeveloperNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperNew'
+    AppDeveloper:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloper'
   responses:
     ApiResponse:
       description: successful operation

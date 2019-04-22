@@ -3113,6 +3113,61 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /developers.list:
+    get:
+      tags:
+        - developers
+      summary: 获取开发者列表
+      operationId: listDeveloper
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.create:
+    post:
+      tags:
+        - developers
+      summary: 创建开发者
+      operationId: createDeveloper
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.update:
+    post:
+      tags:
+        - developers
+      summary: 更新开发者信息
+      operationId: updateDeveloperInfo
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloper'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.read:
+    get:
+      tags:
+        - developers
+      summary: 查询开发者信息
+      operationId: queryDeveloperInfo
+      parameters:
+        - name: name
+          in: query
+          description: 开发者 ID （默认为当前用户）
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
 externalDocs:
   description: See ThingsRoot API example
   url: 'https://thingsroot.com/api/example.html'
@@ -4029,6 +4084,52 @@ components:
         creation:
           type: date-time
           description: 问题创建时间
+    AppDeveloperNew:
+      type: object
+      properties:
+        nickname:
+          type: string
+          description: 开发者短名称.
+        group:
+          type: string
+          description: 开发权限组.
+          enum:
+            - Normal
+            - Power
+            - Admin
+        enabled:
+          type: integer
+          description: Enable flag.
+          default: 1
+          enum:
+            - 0
+            - 1
+    AppDeveloper:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 开发者用户ID.
+        user:
+          type: string
+          description: 开发者用户ID.
+        nickname:
+          type: string
+          description: 开发者短名称.
+        group:
+          type: string
+          description: 开发权限组.
+          enum:
+            - Normal
+            - Power
+            - Admin
+        enabled:
+          type: integer
+          description: Enable flag.
+          default: 1
+          enum:
+            - 0
+            - 1
   requestBodies:
     UserSignup:
       content:
@@ -4120,6 +4221,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Pusher'
+    AppDeveloperNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperNew'
+    AppDeveloper:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloper'
   responses:
     ApiResponse:
       description: successful operation
