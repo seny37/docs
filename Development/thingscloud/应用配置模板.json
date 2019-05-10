@@ -1,0 +1,115 @@
+[
+    {
+        "name": "protocol",
+        "desc": "通讯协议",
+        "type": "dropdown",
+	"value": "Modbus RTU\nModbus TCP"
+    },
+    {
+        "name": "tcp_section",
+        "desc": "TCP端口设定",
+        "type": "section",
+        "depends": "eval:config.protocol==\"Modbus TCP\""
+    },
+    {
+        "name": "ip",
+        "desc": "IP地址",
+        "type": "string"
+    },
+    {
+        "name": "port",
+        "desc": "端口",
+        "type": "string",
+	"value": 502
+    },
+    {
+        "name": "nodelay",
+        "desc": "Nodelay",
+        "type": "boolean",
+	"value": true
+    },
+    {
+        "name": "serial_section",
+        "desc": "串口设定",
+        "type": "section",
+        "depends": "eval:config.protocol==\"Modbus RTU\""
+    },
+    {
+        "name": "tty",
+        "desc": "端口",
+        "type": "string",
+	"value": "ttymcx0"
+    },
+    {
+        "name": "baudrate",
+        "desc": "波特率",
+        "type": "number",
+	"value": 19200
+    },
+    {
+        "name": "stop_bits",
+        "desc": "停止位",
+        "type": "dropdown",
+	"value": "1\n2"
+    },
+    {
+        "name": "data_bits",
+        "desc": "数据位",
+        "type": "dropdown",
+	"value": "8\n7"
+    },
+    {
+        "name": "flow_control",
+        "desc": "流控",
+        "type": "bool",
+        "value": false
+    },
+    {
+        "name": "parity",
+        "desc": "校验",
+        "type": "dropdown",
+	"value": "None\nEven\nOdd"
+    },
+    {
+        "name": "template_section",
+        "desc": "设备模板选择",
+        "type": "section"
+    },
+    {
+        "name": "templates",
+        "desc": "模板选择",
+        "type": "templates"
+    },
+    {
+        "name": "template_section",
+        "desc": "采集设备列表",
+        "type": "section"
+    },
+    {
+        "cols": [
+            {
+                "name": "addr",
+                "desc": "Modbus地址",
+                "type": "number"
+            },
+            {
+                "name": "tpl",
+                "desc": "设备模板",
+                "type": "template"
+            },
+            {
+                "name": "name",
+                "desc": "设备名称",
+                "type": "string"
+            },
+            {
+                "name": "sn",
+                "desc": "设备序列号",
+                "type": "string"
+            }
+        ],
+        "name": "devs",
+        "desc": "设备列表",
+        "type": "table"
+    }
+]
