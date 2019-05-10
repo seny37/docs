@@ -3306,7 +3306,7 @@ components:
         sn:
           type: string
           description: 网关ID (序列号)
-        device_name:
+        dev_name:
           type: string
           description: 网关设备名称.
         description:
