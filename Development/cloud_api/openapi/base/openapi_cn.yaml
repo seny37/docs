@@ -3454,6 +3454,12 @@ components:
         code_name:
           type: string
           description: 应用代码名称(英文字母，不包含特殊字符)
+        published:
+          type: integer
+          description: 是否是否出现在应用市场上
+          enum:
+            - 0
+            - 1
         has_conf_template:
           type: integer
           description: 应用是否有配置模板

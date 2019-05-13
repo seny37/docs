@@ -3456,6 +3456,12 @@ components:
         code_name:
           type: string
           description: Application code name for pkg url.
+        published:
+          type: integer
+          description: Whether application is an public in store
+          enum:
+            - 0
+            - 1
         has_conf_template:
           type: integer
           description: Whether application has configruation template or not
