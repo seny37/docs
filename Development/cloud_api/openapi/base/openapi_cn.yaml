@@ -2401,6 +2401,9 @@ paths:
                 version:
                   type: int
                   description: 指定克隆的版本
+                pre_conf:
+                  type: string                
+                  description: 应用预定义配置（指定后则使用新的预定义配置，否则使用源应用预定义配置) 
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
