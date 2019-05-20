@@ -2385,6 +2385,60 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.forks.create:
+    get:
+      tags:
+        - applications
+      summary: Create application fork
+      operationId: createApplicationFork
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string                
+                  description: Application ID 
+                version:
+                  type: int
+                  description: Application version number to fork
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.forks.list:
+    get:
+      tags:
+        - applications
+      summary: Get application forks
+      operationId: getApplicationForksList
+      parameters:
+        - name: name
+          in: query
+          description: Applicaton ID
+          required: true
+          schema:
+            type: string
+            default: APP00000001
+        - name: version
+          in: query
+          description: The fork version filter
+          required: false
+          schema:
+            type: integer
+        - name: owner
+          in: query
+          description: The user id who forks this application
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /configurations.test:
     post:
       tags:

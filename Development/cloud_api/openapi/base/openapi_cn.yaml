@@ -2383,6 +2383,60 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.forks.create:
+    get:
+      tags:
+        - applications
+      summary: 克隆应用
+      operationId: createApplicationFork
+      requestBody:
+        content:
+          application/json:
+            schema:
+              type: object
+              properties:
+                name:
+                  type: string                
+                  description: 应用 ID 
+                version:
+                  type: int
+                  description: 指定克隆的版本
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /applications.forks.list:
+    get:
+      tags:
+        - applications
+      summary: 获取应用克隆列表
+      operationId: getApplicationForksList
+      parameters:
+        - name: name
+          in: query
+          description: 应用 ID
+          required: true
+          schema:
+            type: string
+            default: APP00000001
+        - name: version
+          in: query
+          description: 克隆版本（可选，默认是所有版本)
+          required: false
+          schema:
+            type: integer
+        - name: owner
+          in: query
+          description: 克隆用户（可选，指定后只查询该用户的克隆)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /configurations.test:
     post:
       tags:
