@@ -1,0 +1,97 @@
+[
+    {
+        "name": "protocol",
+        "desc": "通讯协议",
+        "type": "dropdown",
+        "values": [
+            "tcp",
+            "rtu"
+        ]
+    },
+    {
+        "name": "Link_type",
+        "desc": "链路类型",
+        "type": "dropdown",
+        "depends": {
+            "socket": "socket",
+            "serial": "serial"
+        },
+        "values": [
+            "socket",
+            "serial"
+        ]
+    },
+    {
+        "name": "socket",
+        "desc": "TCP端口设定",
+        "type": "tcp_client"
+    },
+    {
+        "name": "serial",
+        "desc": "串口设定",
+        "type": "serial"
+    },
+    {
+        "name": "device_template_section",
+        "desc": "证书选择",
+        "type": "fake_section",
+        "child": [
+	    {
+		"name": "tpls",
+		"desc": "设备模板选择",
+		"type": "templates"
+	    },
+	    {
+		"name": "devs",
+		"desc": "设备列表",
+		"type": "table",
+		"cols": [
+		    {
+		        "name": "addr",
+		        "desc": "Modbus地址",
+		        "type": "number"
+		    },
+		    {
+		        "name": "tpl",
+		        "desc": "设备模板",
+		        "type": "template"
+		    },
+		    {
+		        "name": "name",
+		        "desc": "设备名称",
+		        "type": "string"
+		    },
+		    {
+		        "name": "desc",
+		        "desc": "设备描述",
+		        "type": "string"
+		    },
+		    {
+		        "name": "sn",
+		        "desc": "设备序列号",
+		        "type": "string"
+		    }
+		]
+	    }
+        ]
+    },
+    {
+        "name": "encryption",
+        "desc": "证书选择",
+        "type": "section",
+        "child": [
+            {
+                "name": "cert",
+                "desc": "UA证书(可选)",
+                "type": "text",
+                "value": "certs/cert.der"
+            },
+            {
+                "name": "key",
+                "desc": "KEY文件(可选)",
+                "type": "string",
+                "value": "certs/key.der"
+            }
+        ]
+    }
+]
