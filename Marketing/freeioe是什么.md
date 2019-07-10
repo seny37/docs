@@ -4,7 +4,7 @@
 
 [FreeIOE](https://github.com/freeioe/freeioe)  是一个为快速开发工业物联网（IIOT）边缘计算应用而产生的开发框架，[FreeIOE](https://github.com/freeioe/freeioe)  是在[skynet](https://github.com/cloudwu/skynet) 开源项目上结合IIOT边缘计算的部分应用场景及业务特点产生的，本意是为了解决搭建工业物联网（IIOT）系统时快速开发工业现场设备数据采集应用，快速对数据预处理，快速连接各种物联网平台等需求。而当[FreeIOE](https://github.com/freeioe/freeioe) 研发完成后，我们发现使用[FreeIOE](https://github.com/freeioe/freeioe) 不仅可以快速开发各种IIOT应用，同时也提供了应用管理，扩展管理，应用日志，通讯报文，云连接等功能；另外，为了使用者能通过互联网更方便的管理和运维分布在全球的FreeIOE运行节点，我们开发了FreeIOE的运维平台[ThingsCloud](http://cloud.thingsroot.com)，通过ThingsCloud，使用者可以非常方便的在管理及运维自己名下的所有FreeIOE节点。因此，使用[FreeIOE](https://github.com/freeioe/freeioe) + [ThingsCloud](http://cloud.thingsroot.com) 来开发，分发，管理，追溯，批量部署IIOT边缘计算应用就变得非常简单和方便。
 
-![freeioe](.freeioe.png)
+![freeioe](freeioe.png)
 
 FreeIOE 项目地址：https://github.com/freeioe/freeioe
 
