@@ -6,7 +6,7 @@
 
 ThingsCloud是一个边缘计算应用在线开发（包含版本管理及应用分发等功能）和边缘计算节点管理运维的一体化中台系统。
 
-![ThingsCloud](D:\网关软件及资料\_冬笋科技\docs\Marketing\ThingsCloud.png)
+![ThingsCloud](ThingsCloud.png)
 
 在ThingsCloud平台，您可以寻找您需要的边缘计算应用并收藏它，你也可以注册成为开发者，为其他用户提供包含您的智慧和经验的应用程序，您还可以在ThingsCloud上创建你的团队一起来开发边缘计算应用；
 
@@ -18,7 +18,7 @@ ThingsCloud是一个边缘计算应用在线开发（包含版本管理及应用
 
 通过ThingsCloud平台，您可以追溯到你名下所有网关的操作记录以及设备事件。
 
-![ThingsCloud_plat_event](.\ThingsCloud_plat_event.png)
+![ThingsCloud_plat_event](ThingsCloud_plat_event.png)
 
 ## 特性
 
