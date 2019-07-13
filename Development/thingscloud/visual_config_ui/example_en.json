@@ -1,0 +1,105 @@
+[
+    {
+        "name": "protocol",
+        "desc": "Modbus Protocol",
+        "type": "dropdown",
+        "values": [
+            "tcp",
+            "rtu"
+        ]
+    },
+    {
+        "name": "Link_type",
+        "desc": "Link Type",
+        "type": "dropdown",
+        "depends": {
+            "socket": "socket",
+            "serial": "serial"
+        },
+        "values": [
+            "socket",
+            "serial"
+        ]
+    },
+    {
+        "name": "socket",
+        "desc": "TCP Settings",
+        "type": "tcp_client"
+    },
+    {
+        "name": "serial",
+        "desc": "Serial Setttings",
+        "type": "serial"
+    },
+	{
+		"name": "tpls",
+		"desc": "Device Template Selection",
+		"type": "templates"
+	},
+	{
+		"name": "devs",
+		"desc": "Device List",
+		"type": "table",
+		"cols": [
+			{
+				"name": "addr",
+				"desc": "Modbus Unit Address",
+				"type": "number"
+			},
+			{
+				"name": "tpl",
+				"desc": "Device Template",
+				"type": "template"
+			},
+			{
+				"name": "name",
+				"desc": "Device Name",
+				"type": "string"
+			},
+			{
+				"name": "desc",
+				"desc": "Device Description",
+				"type": "string"
+			},
+			{
+				"name": "sn",
+				"desc": "Device Production Serial Number",
+				"type": "string"
+			},
+			{
+				"name": "type",
+				"desc": "Device Type",
+				"type": "dropdown",
+				"values": [
+					{
+						"name": "No Control",
+						"value": "no_ctrl"
+					},
+					{
+						"name": "Has Control",
+						"value": "ctrl"
+					}
+				]
+			}
+		]
+	},
+	{
+        "name": "encryption",
+        "desc": "Encryption Settings",
+        "type": "section",
+        "child": [
+            {
+                "name": "cert",
+                "desc": "UA Certs file (optional)",
+                "type": "text",
+                "value": "certs/cert.der"
+            },
+            {
+                "name": "key",
+                "desc": "Private Key file (optional)",
+                "type": "string",
+                "value": "certs/key.der"
+            }
+        ]
+    }
+]

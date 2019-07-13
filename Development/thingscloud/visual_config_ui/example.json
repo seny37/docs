@@ -31,51 +31,59 @@
         "desc": "串口设定",
         "type": "serial"
     },
-    {
-        "name": "device_template_section",
-        "desc": "证书选择",
-        "type": "fake_section",
-        "child": [
-	    {
+	{
 		"name": "tpls",
 		"desc": "设备模板选择",
 		"type": "templates"
-	    },
-	    {
+	},
+	{
 		"name": "devs",
 		"desc": "设备列表",
 		"type": "table",
 		"cols": [
-		    {
-		        "name": "addr",
-		        "desc": "Modbus地址",
-		        "type": "number"
-		    },
-		    {
-		        "name": "tpl",
-		        "desc": "设备模板",
-		        "type": "template"
-		    },
-		    {
-		        "name": "name",
-		        "desc": "设备名称",
-		        "type": "string"
-		    },
-		    {
-		        "name": "desc",
-		        "desc": "设备描述",
-		        "type": "string"
-		    },
-		    {
-		        "name": "sn",
-		        "desc": "设备序列号",
-		        "type": "string"
-		    }
+			{
+				"name": "addr",
+				"desc": "Modbus地址",
+				"type": "number"
+			},
+			{
+				"name": "tpl",
+				"desc": "设备模板",
+				"type": "template"
+			},
+			{
+				"name": "name",
+				"desc": "设备名称",
+				"type": "string"
+			},
+			{
+				"name": "desc",
+				"desc": "设备描述",
+				"type": "string"
+			},
+			{
+				"name": "sn",
+				"desc": "设备序列号",
+				"type": "string"
+			},
+			{
+				"name": "type",
+				"desc": "设备类型",
+				"type": "dropdown",
+				"values": [
+					{
+						"name": "无控制",
+						"value": "no_ctrl"
+					},
+					{
+						"name": "有控制",
+						"value": "ctrl"
+					}
+				]
+			}
 		]
-	    }
-        ]
-    },
-    {
+	},
+	{
         "name": "encryption",
         "desc": "证书选择",
         "type": "section",

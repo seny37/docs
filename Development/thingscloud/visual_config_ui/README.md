@@ -134,7 +134,8 @@
 
 下拉框UI控件,较之基础控件多出以下属性：
 
-1. values: 字符串数组描述下拉框可选择项
+1. values: 字符串数组(对象数组)描述下拉框可选择项\
+    当为对象数组时，对象需要包含name value两个字段，其中name字段用以显示，value字段用以生成JSON配置（depends存在的话也是基于value字段进行判断)
 2. depends: 字典描述values下的可选择项所影响的UI控件名称(顶级控件或者本区域内的控件）
 
 ### tcp_client
@@ -172,4 +173,6 @@ TCP客户端连接属性配置，包括:
 
 ### table
 
-表格控件，自定义列的类型可以是：number/string/template。 同时列的属性节点名称(name)应避免使用“key"，此名称保留给UI空间作为数组ID来使用
+表格控件，自定义列的类型可以是：number/string/template/dropdown。 同时列的属性节点名称(name)应避免使用“key"，此名称保留给UI空间作为数组ID来使用
+
+注: 表格中的dropdown控件不再支持depends功能。
