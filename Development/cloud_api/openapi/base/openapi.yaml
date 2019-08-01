@@ -1002,7 +1002,7 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get output/command execution result
+      summary: Get gateway operation execution result
       operationId: getGatewayDeviceExecutionResult
       parameters:
         - name: id
