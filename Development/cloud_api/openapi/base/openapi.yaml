@@ -985,7 +985,7 @@ paths:
       summary: Remove gateway from your gateway list
       operationId: removeGateway
       parameters:
-        - name: devices
+        - name: name
           in: query
           description: Gateway ID ( serial number )
           required: true

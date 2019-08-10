@@ -983,7 +983,7 @@ paths:
       summary: 移除网关
       operationId: removeGateway
       parameters:
-        - name: devices
+        - name: name
           in: query
           description: 网关ID(序列号)
           required: true
