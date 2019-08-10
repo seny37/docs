@@ -3338,7 +3338,7 @@ components:
     GatewayNew:
       type: object
       properties:
-        device_name:
+        dev_name:
           type: string
           description: 网关设备名称.
         description:

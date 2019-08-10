@@ -3340,7 +3340,7 @@ components:
     GatewayNew:
       type: object
       properties:
-        device_name:
+        dev_name:
           type: string
           description: Gateway device name specified by user.
         description:
