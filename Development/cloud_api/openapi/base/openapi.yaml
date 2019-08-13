@@ -985,7 +985,7 @@ paths:
       summary: Remove gateway from your gateway list
       operationId: removeGateway
       parameters:
-        - name: devices
+        - name: name
           in: query
           description: Gateway ID ( serial number )
           required: true
@@ -1002,7 +1002,7 @@ paths:
     get:
       tags:
         - gateways
-      summary: Get output/command execution result
+      summary: Get gateway operation execution result
       operationId: getGatewayDeviceExecutionResult
       parameters:
         - name: id
@@ -3340,7 +3340,7 @@ components:
     GatewayNew:
       type: object
       properties:
-        device_name:
+        dev_name:
           type: string
           description: Gateway device name specified by user.
         description:

@@ -983,7 +983,7 @@ paths:
       summary: 移除网关
       operationId: removeGateway
       parameters:
-        - name: devices
+        - name: name
           in: query
           description: 网关ID(序列号)
           required: true
@@ -1003,9 +1003,9 @@ paths:
       summary: 获取网关操作指令结果
       operationId: getGatewayDeviceExecutionResult
       parameters:
-        - name: gateway
+        - name: id
           in: query
-          description: 网关ID(序列号)
+          description: 网关操作指令ID
           required: true
           schema:
             type: string
@@ -3338,7 +3338,7 @@ components:
     GatewayNew:
       type: object
       properties:
-        device_name:
+        dev_name:
           type: string
           description: 网关设备名称.
         description:
