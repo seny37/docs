@@ -2723,6 +2723,113 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.test:
+    post:
+      tags:
+        - companies
+      summary: Check whether the api is available or not
+      operationId: apiCompanyRequisitionTest
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+      parameters: []
+  /companies.requisition.list:
+    get:
+      tags:
+        - companies
+      summary: Get user company requisition list
+      operationId: listCompanyRequisition
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.create:
+    post:
+      tags:
+        - companies
+      summary: Create new company requisition
+      operationId: createCompanyRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyRequisitionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.update:
+    post:
+      tags:
+        - companies
+      summary: Update company requisition information
+      operationId: updateCompanyRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyRequisition'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.update_business_licence:
+    post:
+      tags:
+        - companies
+      summary: Update company requisition business license file
+      operationId: updateCompanyRequisitionLicense
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Requisition Business license image file
+                name:
+                  type: string
+                  description: Requisition ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.read:
+    get:
+      tags:
+        - companies
+      summary: Query company requisition infomration
+      operationId: queryCompanyRequisitionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Company ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.remove:
+    post:
+      tags:
+        - companies
+      summary: Remove company requisition
+      operationId: removeCompanyRequisition
+      parameters:
+        - name: name
+          in: query
+          description: Requisition ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /pushers.test:
     post:
       tags:
@@ -3337,6 +3444,66 @@ components:
         contact:
           type: string
           description: Contact information
+    CompanyRequisitionNew:
+      type: object
+      properties:
+        comp_name:
+          type: string
+          description: company short name
+        full_name:
+          type: string
+          description: Company full name
+        credit_code:
+          type: string
+          description: Company Credit Code
+        domain:
+          type: domain
+          description: Company domain
+        telephone:
+          type: string
+          description: Company telephone number
+        contact:
+          type: string
+          description: Contact information
+        address:
+          type: string
+          description: Contact address
+        business_license_file:
+          type: file
+          description: Business License Image File
+    CompanyRequisition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: company requisition object name
+        comp_name:
+          type: string
+          description: company short name
+        full_name:
+          type: string
+          description: Company full name
+        credit_code:
+          type: string
+          description: Company Credit Code
+        domain:
+          type: domain
+          description: Company domain
+        admin:
+          type: email
+          description: Admin user id
+        telephone:
+          type: string
+          description: Company telephone number
+        contact:
+          type: string
+          description: Contact information
+        address:
+          type: string
+          description: Contact address
+        business_license:
+          type: string
+          description: business image file path
     GatewayNew:
       type: object
       properties:
@@ -4276,6 +4443,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Company'
+    CompanyRequisitionNew:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/CompanyRequisitionNew'
+    CompanyRequisition:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyRequisition'
     PusherNew:
       content:
         application/json:
