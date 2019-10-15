@@ -11,4 +11,5 @@
 
 2) 更改防火墙安全规则，开启MQTT Broker服务器的TCP端口，由于本例中使用了阿里云的ECS主机，默认情况下，MQTT Broker的服务端口并未在ECS主机的外部防火墙规则中开启，因此需要登录阿里云账户，在ECS主机的安全规则中开启MQTT Broker的服务端口，一般开启TCP端口1883，8883即可；如需要远程管理EMQ X Broker，可开启TCP端口18083；如前端页面需要直接访问EMQ X Broker，开启TCP端口8083，8084；更加详细的说明，可阅读EMQ X Broker的帮助文档。
 
-3) 上面2步完成后，可通过mqtt客户端工具测试一下EMQ X Broker工作是否正常，这里使用网上使用者较多的mqtt客户端工具[mqttfx](http://mqttfx.jensd.de/index.php/download),通过此客户端工具，能和自己部署的MQTT Broker收发消息，就说明工作正常了。下面继续说明如何在ThingsCloud平台配置ThingsLink网关，将ThingsLink网关的数据推送到自建的MQTT Broker。
+### MQTT客户端
+MQTT Broker完成安装后，可通过mqtt客户端工具测试一下EMQ X Broker工作是否正常，这里使用网上使用者较多的mqtt客户端工具[mqttfx](http://mqttfx.jensd.de/index.php/download),通过此客户端工具，能和自己部署的MQTT Broker收发消息，就说明工作正常了。下面继续说明如何在ThingsCloud平台配置ThingsLink网关，将ThingsLink网关的数据推送到自建的MQTT Broker。

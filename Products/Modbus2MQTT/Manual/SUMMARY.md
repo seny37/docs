@@ -27,6 +27,8 @@
 
 * [Modbus采集应用配置](docs/part-iii/Modbus-config.md)
 
+* [设备数据浏览](docs/part-iii/Devices-list.md)
+
 * [MQTT云转发前期准备](docs/part-iii/MQTT-prepare.md)
 
 * [MQTT云转发应用配置](docs/part-iii/MQTT-config.md)
