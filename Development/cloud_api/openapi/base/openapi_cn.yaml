@@ -42,6 +42,8 @@ tags:
     description: 云数据发布接口
   - name: store
     description: 应用市场接口
+  - name: developers
+    description: 应用开发者
   - name: xtags
     description: 标签管理接口
 paths:
@@ -2721,6 +2723,113 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.test:
+    post:
+      tags:
+        - companies
+      summary: Check whether the api is available or not
+      operationId: apiCompanyRequisitionTest
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+      parameters: []
+  /companies.requisition.list:
+    get:
+      tags:
+        - companies
+      summary: 获取公司注册申请列表
+      operationId: listCompanyRequisition
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.create:
+    post:
+      tags:
+        - companies
+      summary: 创建公司注册申请
+      operationId: createCompanyRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyRequisitionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.update:
+    post:
+      tags:
+        - companies
+      summary: 更新公司注册申请
+      operationId: updateCompanyRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyRequisition'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.update_business_licence:
+    post:
+      tags:
+        - companies
+      summary: 更新公司注册申请的公司运营执照图片
+      operationId: updateCompanyRequisitionLicense
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Requisition Business license image file
+                name:
+                  type: string
+                  description: Requisition ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.read:
+    get:
+      tags:
+        - companies
+      summary: 读取公司注册申请详细信息
+      operationId: queryCompanyRequisitionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Company ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.requisition.remove:
+    post:
+      tags:
+        - companies
+      summary: 取消公司注册申请
+      operationId: removeCompanyRequisition
+      parameters:
+        - name: name
+          in: query
+          description: Requisition ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /pushers.test:
     post:
       tags:
@@ -3335,6 +3444,66 @@ components:
         contact:
           type: string
           description: 联系人信息
+    CompanyRequisitionNew:
+      type: object
+      properties:
+        comp_name:
+          type: string
+          description: 公司简称
+        full_name:
+          type: string
+          description: 公司全称
+        credit_code:
+          type: string
+          description: 公司信用代码（税号)
+        domain:
+          type: domain
+          description: 公司域名
+        telephone:
+          type: string
+          description: 联系电话
+        contact:
+          type: string
+          description: 联系地址
+        address:
+          type: string
+          description: 公司注册地址
+        business_license_file:
+          type: file
+          description: 公司运营执照照片文件
+    CompanyRequisition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 公司申请书对象ID
+        comp_name:
+          type: string
+          description: 公司简称
+        full_name:
+          type: string
+          description: 公司全称
+        credit_code:
+          type: string
+          description: 公司信用代码（税号)
+        domain:
+          type: domain
+          description: 公司域名
+        admin:
+          type: email
+          description: 管理员用户名
+        telephone:
+          type: string
+          description: 联系电话
+        contact:
+          type: string
+          description: 联系地址
+        address:
+          type: string
+          description: 公司注册地址
+        business_license:
+          type: string
+          description: 公司运营执照图片地址
     GatewayNew:
       type: object
       properties:
@@ -4274,6 +4443,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Company'
+    CompanyRequisitionNew:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/CompanyRequisitionNew'
+    CompanyRequisition:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyRequisition'
     PusherNew:
       content:
         application/json:
