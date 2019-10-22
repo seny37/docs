@@ -2723,6 +2723,155 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.list:
+    get:
+      tags:
+        - companies
+      summary: Get company group list
+      operationId: listCompanyGroup
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.create:
+    post:
+      tags:
+        - companies
+      summary: Create new company group
+      operationId: createCompanyGroup
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyGroupNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.update:
+    post:
+      tags:
+        - companies
+      summary: Update company group information
+      operationId: updateCompanyGroupInfo
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyGroup'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.read:
+    get:
+      tags:
+        - companies
+      summary: Query company group infomration
+      operationId: queryCompanyGroupInfo
+      parameters:
+        - name: name
+          in: query
+          description: Company Group ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.remove:
+    post:
+      tags:
+        - companies
+      summary: Remove company group
+      operationId: removeCompanyGroup
+      parameters:
+        - name: name
+          in: query
+          description: Company Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  
+  /companies.sharedgroup.list:
+    get:
+      tags:
+        - companies
+      summary: Get company share group list
+      operationId: listCompanyShareGroup
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroup.create:
+    post:
+      tags:
+        - companies
+      summary: Create new company share group
+      operationId: createCompanyShareGroup
+      requestBody:
+        $ref: '#/components/requestBodies/GatewayShareGroupNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroup.update:
+    post:
+      tags:
+        - companies
+      summary: Update company share group information
+      operationId: updateCompanyShareGroupInfo
+      requestBody:
+        $ref: '#/components/requestBodies/GatewayShareGroup'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroup.read:
+    get:
+      tags:
+        - companies
+      summary: Query company share group infomration
+      operationId: queryCompanyShareGroupInfo
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroup.remove:
+    post:
+      tags:
+        - companies
+      summary: Remove company share group
+      operationId: removeCompanyShareGroup
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /companies.requisition.test:
     post:
       tags:
@@ -2802,7 +2951,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: Company ID
+          description: Requisition ID
           required: true
           schema:
             type: string
@@ -3444,6 +3593,60 @@ components:
         contact:
           type: string
           description: Contact information
+    CompanyGroupUser:
+      type: object
+      properties:
+        user:
+          type: string
+          description: User ID
+        role:
+          type: string
+          description: Cloud User Role (Admin)
+    CompanyGroupNew:
+      type: object
+      properties:
+        comany:
+          type: string
+          description: Company ID
+        group_name:
+          type: string
+          description: Company group name
+        enabled:
+          type: integer
+          description: Company enable flag.
+          enum:
+            - 0
+            - 1
+        description:
+          type: string
+          description: Company group description
+        user_list:
+          type: array
+          description: CompanyGroupUser
+    CompanyGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Company Group ID
+        comany:
+          type: string
+          description: Company ID
+        group_name:
+          type: string
+          description: Company group name
+        enabled:
+          type: integer
+          description: Company enable flag.
+          enum:
+            - 0
+            - 1
+        description:
+          type: string
+          description: Company group description
+        user_list:
+          type: array
+          description: CompanyGroupUser
     CompanyRequisitionNew:
       type: object
       properties:
@@ -4362,6 +4565,60 @@ components:
           enum:
             - 0
             - 1
+    GatewayShareGroupUser:
+      type: object
+      properties:
+        user:
+          type: string
+          description: User ID (email)
+        comment:
+          type: string
+          description: User Comment
+    GatewayShareGroupDevice:
+      type: object
+      properties:
+        device:
+          type: string
+          description: Gateway ID (email)
+    GatewayShareGroupNew:
+      type: object
+      properties:
+        company:
+          type: string
+          description: Company ID
+        group_name:
+          type: string
+          description: Device share group name.
+        role:
+          type: string
+          description: Cloud User Role (Admin).
+        users:
+          type: array
+          description: DeviceShareGroupUser.
+        devices:
+          type: array
+          description: DeviceShareGroupDevice.
+    GatewayShareGroup:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Share group id
+        company:
+          type: string
+          description: Company ID
+        group_name:
+          type: string
+          description: Device share group name.
+        role:
+          type: string
+          description: Cloud User Role (Admin).
+        users:
+          type: array
+          description: DeviceShareGroupUser.
+        devices:
+          type: array
+          description: DeviceShareGroupDevice.
   requestBodies:
     UserSignup:
       content:
@@ -4443,6 +4700,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Company'
+    CompanyGroupNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyGroupNew'
+    CompanyGroup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyGroup'
     CompanyRequisitionNew:
       content:
         multipart/form-data:
@@ -4473,6 +4740,21 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/AppDeveloper'
+    GatewayShareGroupDevice:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GatewayShareGroupDevice'
+    GatewayShareGroupUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GatewayShareGroupUser'
+    GatewayShareGroup:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GatewayShareGroup'
   responses:
     ApiResponse:
       description: successful operation
