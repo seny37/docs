@@ -2729,6 +2729,14 @@ paths:
         - companies
       summary: 获取公司组列表
       operationId: listCompanyGroup
+      parameters:
+        - name: company
+          in: query
+          description: 公司 ID
+          required: true
+          explode: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -2804,6 +2812,14 @@ paths:
         - companies
       summary: 获取设备共享组类表
       operationId: listCompanyShareGroup
+      parameters:
+        - name: company
+          in: query
+          description: 公司 ID
+          required: true
+          explode: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'

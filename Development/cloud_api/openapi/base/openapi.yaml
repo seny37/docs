@@ -2729,6 +2729,14 @@ paths:
         - companies
       summary: Get company group list
       operationId: listCompanyGroup
+      parameters:
+        - name: company
+          in: query
+          description: Company ID
+          required: true
+          explode: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -2804,6 +2812,14 @@ paths:
         - companies
       summary: Get company share group list
       operationId: listCompanyShareGroup
+      parameters:
+        - name: company
+          in: query
+          description: Company ID
+          required: true
+          explode: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
