@@ -4766,6 +4766,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/GatewayShareGroupUser'
+    GatewayShareGroupNew:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/GatewayShareGroupNew'
     GatewayShareGroup:
       content:
         application/json:
