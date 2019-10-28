@@ -2805,7 +2805,58 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
-  
+  /companies.groups.add_user:
+    post:
+      tags:
+        - companies
+      summary: 添加用户到公司组
+      operationId: addCompanyGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: 公司组 ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.remove_user:
+    post:
+      tags:
+        - companies
+      summary: 从公司组删除用户
+      operationId: removeCompanyGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: 公司组 ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /companies.sharedgroups.list:
     get:
       tags:
@@ -2879,6 +2930,117 @@ paths:
         - name: name
           in: query
           description: 设备共享组ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.add_user:
+    post:
+      tags:
+        - companies
+      summary: 添加用户到设备共享组
+      operationId: addCompanyShareGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: 设备共享组ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: 用户 ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          description: 用户备注
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.remove_user:
+    post:
+      tags:
+        - companies
+      summary: 从设备共享组删除用户
+      operationId: removeCompanyShareGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: 设备共享组ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: 用户 ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.add_device:
+    post:
+      tags:
+        - companies
+      summary: 添加设备到设备共享组
+      operationId: addCompanyShareGroupDevice
+      parameters:
+        - name: name
+          in: query
+          description: 设备共享组ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: device
+          in: query
+          description: 网关序列号
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.remove_device:
+    post:
+      tags:
+        - companies
+      summary: 从设备共享组移除网关设备
+      operationId: removeCompanyShareGroupDevice
+      parameters:
+        - name: name
+          in: query
+          description: 设备共享组ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: device
+          in: query
+          description: 网关序列号
           required: true
           explode: true
           schema:

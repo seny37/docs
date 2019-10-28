@@ -2805,7 +2805,58 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
-  
+  /companies.groups.add_user:
+    post:
+      tags:
+        - companies
+      summary: Add user to company group
+      operationId: addCompanyGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: Company Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.groups.remove_user:
+    post:
+      tags:
+        - companies
+      summary: Remove company group
+      operationId: removeCompanyGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: Company Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /companies.sharedgroups.list:
     get:
       tags:
@@ -2879,6 +2930,117 @@ paths:
         - name: name
           in: query
           description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.add_user:
+    post:
+      tags:
+        - companies
+      summary: Add user to company group
+      operationId: addCompanyShareGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          description: User Comment
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.remove_user:
+    post:
+      tags:
+        - companies
+      summary: Add user to company group
+      operationId: removeCompanyShareGroupUser
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: user
+          in: query
+          description: User ID
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.add_device:
+    post:
+      tags:
+        - companies
+      summary: Add device to company share group
+      operationId: addCompanyShareGroupDevice
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: device
+          in: query
+          description: Gateway SN
+          required: true
+          explode: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.sharedgroups.remove_device:
+    post:
+      tags:
+        - companies
+      summary: Add user to company group
+      operationId: removeCompanyShareGroupDevice
+      parameters:
+        - name: name
+          in: query
+          description: Company Share Group ID
+          required: true
+          explode: true
+          schema:
+            type: string
+        - name: device
+          in: query
+          description: Gateway SN
           required: true
           explode: true
           schema:
