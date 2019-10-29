@@ -2723,6 +2723,37 @@ paths:
           $ref: '#/components/responses/ApiResponse'
         default:
           $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.users.create:
+    post:
+      tags:
+        - companies
+      summary: 创建公司用户
+      operationId: createCompanyUser
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyUser'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.users.read:
+    get:
+      tags:
+        - companies
+      summary: 查询公司用户信息
+      operationId: queryCompanyUserInfo
+      parameters:
+        - name: name
+          in: query
+          description: User ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /companies.groups.list:
     get:
       tags:
@@ -3771,6 +3802,27 @@ components:
         contact:
           type: string
           description: 联系人信息
+    CompanyUser:
+      type: object
+      properties:
+        email:
+          type: string
+          description: 用户邮箱 ID
+        company:
+          type: string
+          description: 公司 ID
+        first_name:
+          type: string
+          description: 名
+        last_name:
+          type: domain
+          description: 姓
+        mobile_no:
+          type: email
+          description: 电话
+        new_password:
+          type: string
+          description: 密码
     CompanyGroupUser:
       type: object
       properties:
@@ -4873,6 +4925,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CompanyNew'
+    CompanyUser:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyUser'
     Company:
       content:
         application/json:
