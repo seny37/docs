@@ -2740,7 +2740,7 @@ paths:
     get:
       tags:
         - companies
-      summary: Query company infomration
+      summary: Query company user infomration
       operationId: queryCompanyUserInfo
       parameters:
         - name: name
@@ -2749,6 +2749,19 @@ paths:
           required: true
           schema:
             type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /companies.users.update:
+    post:
+      tags:
+        - companies
+      summary: Update company user infomration
+      operationId: updateCompanyUserInfo
+      requestBody:
+        $ref: '#/components/requestBodies/CompanyUserUpdate'
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -3811,6 +3824,21 @@ components:
         company:
           type: string
           description: Company ID
+        first_name:
+          type: string
+          description: User first name
+        last_name:
+          type: domain
+          description: User first name
+        mobile_no:
+          type: email
+          description: User Mobile Number
+        new_password:
+          type: string
+          description: User Password
+    CompanyUserUpdate:
+      type: object
+      properties:
         first_name:
           type: string
           description: User first name
@@ -4930,6 +4958,11 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/CompanyUser'
+    CompanyUserUpdate:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/CompanyUserUpdate'
     Company:
       content:
         application/json:
