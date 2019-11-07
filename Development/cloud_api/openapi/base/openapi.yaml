@@ -3650,6 +3650,102 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /developers.requisition.list:
+    get:
+      tags:
+        - developers
+      summary: Get application developer requisition list
+      operationId: listDeveloperRequisition
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.create:
+    post:
+      tags:
+        - developers
+      summary: Create new developer requisition
+      operationId: createDeveloperRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperRequisitionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.update:
+    post:
+      tags:
+        - developers
+      summary: Update developer requisition information
+      operationId: updateDeveloperRequisitionInfo
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperRequisition'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.update_id_card_image:
+    post:
+      tags:
+        - companies
+      summary: Update developer requisition id card image file
+      operationId: updateDeveloperRequisitionImageInfo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: Requisition Business license image file
+                name:
+                  type: string
+                  description: Developer Requisition ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.read:
+    get:
+      tags:
+        - developers
+      summary: Query developer requisition infomration
+      operationId: queryDeveloperRequisitionInfo
+      parameters:
+        - name: name
+          in: query
+          description: Developer requisition ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.remove:
+    get:
+      tags:
+        - developers
+      summary: Remove developer requisition
+      operationId: removeDeveloperRequisition
+      parameters:
+        - name: name
+          in: query
+          description: Developer requisition ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /developers.list:
     get:
       tags:
@@ -4777,12 +4873,75 @@ components:
         creation:
           type: date-time
           description: Comment creation timestamp.
+    AppDeveloperRequisitionNew:
+      type: object
+      properties:
+        user:
+          type: string
+          description: User ID
+        nickname:
+          type: string
+          description: Developer Nickname.
+        id_card:
+          type: string
+          description: Developer ID Card.
+        id_card_image:
+          type: string
+          description: Developer ID Card Image.
+        addess:
+          type: string
+          description: Developer address information.
+        pay_bank:
+          type: string
+          description: Developer payment bank name.
+        pay_account:
+          type: string
+          description: Developer payment card account id.
+    AppDeveloperRequisition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: Developer requisition id.
+        user:
+          type: string
+          description: Developer user id.
+        nickname:
+          type: string
+          description: Developer Nickname.
+        id_card:
+          type: string
+          description: Developer ID Card.
+        id_card_image:
+          type: string
+          description: Developer ID Card Image.
+        addess:
+          type: string
+          description: Developer address information.
+        pay_bank:
+          type: string
+          description: Developer payment bank name.
+        pay_account:
+          type: string
+          description: Developer payment card account id.
     AppDeveloperNew:
       type: object
       properties:
         nickname:
           type: string
           description: Developer Nickname.
+        id_card:
+          type: string
+          description: Developer ID Card.
+        addess:
+          type: string
+          description: Developer address information.
+        pay_bank:
+          type: string
+          description: Developer payment bank name.
+        pay_account:
+          type: string
+          description: Developer payment card account id.
         group:
           type: string
           description: Developer Group.
@@ -4809,6 +4968,18 @@ components:
         nickname:
           type: string
           description: Developer Nickname.
+        id_card:
+          type: string
+          description: Developer ID Card.
+        addess:
+          type: string
+          description: Developer address information.
+        pay_bank:
+          type: string
+          description: Developer payment bank name.
+        pay_account:
+          type: string
+          description: Developer payment card account id.
         group:
           type: string
           description: Developer Group.
@@ -4998,6 +5169,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Pusher'
+    AppDeveloperRequisitionNew:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperRequisitionNew'
+    AppDeveloperRequisition:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperRequisition'
     AppDeveloperNew:
       content:
         application/json:

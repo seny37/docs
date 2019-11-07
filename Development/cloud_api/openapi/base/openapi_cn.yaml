@@ -3650,6 +3650,102 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /developers.requisition.list:
+    get:
+      tags:
+        - developers
+      summary: 获取开发者申请单列表
+      operationId: listDeveloperRequisition
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.create:
+    post:
+      tags:
+        - developers
+      summary: 创建新的开发者申请单
+      operationId: createDeveloperRequisition
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperRequisitionNew'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.update:
+    post:
+      tags:
+        - developers
+      summary: 修改开发者申请单
+      operationId: updateDeveloperRequisitionInfo
+      requestBody:
+        $ref: '#/components/requestBodies/AppDeveloperRequisition'
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.update_id_card_image:
+    post:
+      tags:
+        - companies
+      summary: 更新开发者申请中的身份证照片文件
+      operationId: updateDeveloperRequisitionImageInfo
+      requestBody:
+        content:
+          multipart/form-data:
+            schema:
+              properties:
+                file:
+                  type: string
+                  format: binary
+                  description: 身份证照片文件
+                name:
+                  type: string
+                  description: Developer Requisition ID
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.read:
+    get:
+      tags:
+        - developers
+      summary: 获取开发者申请单信息
+      operationId: queryDeveloperRequisitionInfo
+      parameters:
+        - name: name
+          in: query
+          description: 申请ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+  /developers.requisition.remove:
+    get:
+      tags:
+        - developers
+      summary: 删除开发者申请单
+      operationId: removeDeveloperRequisition
+      parameters:
+        - name: name
+          in: query
+          description: 申请ID
+          required: true
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
   /developers.list:
     get:
       tags:
@@ -4777,12 +4873,75 @@ components:
         creation:
           type: date-time
           description: 问题创建时间
+    AppDeveloperRequisitionNew:
+      type: object
+      properties:
+        user:
+          type: string
+          description: 用户ID
+        nickname:
+          type: string
+          description: 开发者短名称
+        id_card:
+          type: string
+          description: 开发者身份证信息.
+        id_card_image:
+          type: string
+          description: 开发者身份证照片.
+        addess:
+          type: string
+          description: 开发者住址/联系地址
+        pay_bank:
+          type: string
+          description: 开发者绑定银行卡开户行名称.
+        pay_account:
+          type: string
+          description: 开发者绑定银行卡.
+    AppDeveloperRequisition:
+      type: object
+      properties:
+        name:
+          type: string
+          description: 用户ID
+        user:
+          type: string
+          description: 用户ID
+        nickname:
+          type: string
+          description: 开发者短名称
+        id_card:
+          type: string
+          description: 开发者身份证信息.
+        id_card_image:
+          type: string
+          description: 开发者身份证照片.
+        addess:
+          type: string
+          description: 开发者住址/联系地址
+        pay_bank:
+          type: string
+          description: 开发者绑定银行卡开户行名称.
+        pay_account:
+          type: string
+          description: 开发者绑定银行卡.
     AppDeveloperNew:
       type: object
       properties:
         nickname:
           type: string
           description: 开发者短名称.
+        id_card:
+          type: string
+          description: 开发者身份证信息.
+        addess:
+          type: string
+          description: 开发者住址/联系地址
+        pay_bank:
+          type: string
+          description: 开发者绑定银行卡开户行名称.
+        pay_account:
+          type: string
+          description: 开发者绑定银行卡.
         group:
           type: string
           description: 开发权限组.
@@ -4809,6 +4968,18 @@ components:
         nickname:
           type: string
           description: 开发者短名称.
+        id_card:
+          type: string
+          description: 开发者身份证信息.
+        addess:
+          type: string
+          description: 开发者住址/联系地址
+        pay_bank:
+          type: string
+          description: 开发者绑定银行卡开户行名称.
+        pay_account:
+          type: string
+          description: 开发者绑定银行卡.
         group:
           type: string
           description: 开发权限组.
@@ -4998,6 +5169,16 @@ components:
         application/json:
           schema:
             $ref: '#/components/schemas/Pusher'
+    AppDeveloperRequisitionNew:
+      content:
+        multipart/form-data:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperRequisitionNew'
+    AppDeveloperRequisition:
+      content:
+        application/json:
+          schema:
+            $ref: '#/components/schemas/AppDeveloperRequisition'
     AppDeveloperNew:
       content:
         application/json:
