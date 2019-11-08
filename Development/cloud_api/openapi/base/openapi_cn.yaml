@@ -3565,6 +3565,25 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /store.tags.list:
+    post:
+      tags:
+        - store
+      summary: 获取应用市场所有可用的应用标签
+      operationId: listStoreApplicationTags
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
   /developers.requisition.list:
     get:
       tags:
@@ -4135,11 +4154,9 @@ components:
         pre_configuration:
           type: string
           description: 应用默认配置
-        keywords:
-          type: array
+        tags:
+          type: string
           description: 应用标签
-          items:
-            type: string
     Application:
       type: object
       properties:
@@ -4192,11 +4209,9 @@ components:
         icon_image:
           type: string
           description: 应用图标地址
-        keywords:
-          type: array
+        tags:
+          type: string
           description: 应用标签
-          items:
-            type: string
         owner:
           type: string
           description: 所有者ID
@@ -4263,11 +4278,9 @@ components:
           enum:
             - 0
             - 1
-        keywords:
-          type: array
+        tags:
+          type: string
           description: 标签
-          items:
-            type: string
         owner_type:
           type: string
           description: 所有者类型
@@ -4305,11 +4318,9 @@ components:
           enum:
             - 0
             - 1
-        keywords:
-          type: array
+        tags:
+          type: string
           description: 标签
-          items:
-            type: string
         owner_type:
           type: string
           description: 所有者类型

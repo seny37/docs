@@ -3565,6 +3565,25 @@ paths:
                 type: string
                 enum: 
                   - exception
+  /store.tags.list:
+    post:
+      tags:
+        - store
+      summary: List all avaiable application tags
+      operationId: listStoreApplicationTags
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
   /developers.requisition.list:
     get:
       tags:
@@ -4135,11 +4154,9 @@ components:
         pre_configuration:
           type: string
           description: Pre application configuration
-        keywords:
-          type: array
-          description: Application keywords
-          items:
-            type: string
+        tags:
+          type: string
+          description: Application tags
     Application:
       type: object
       properties:
@@ -4192,11 +4209,9 @@ components:
         icon_image:
           type: string
           description: Icon image file url path.
-        keywords:
-          type: array
-          description: Application keywords
-          items:
-            type: string
+        tags:
+          type: string
+          description: Application .tags.list
         owner:
           type: string
           description: Onwer ID
@@ -4263,11 +4278,9 @@ components:
           enum:
             - 0
             - 1
-        keywords:
-          type: array
-          description: Application keywords
-          items:
-            type: string
+        tags:
+          type: string
+          description: Configuration tags
         owner_type:
           type: string
           description: Owner type
@@ -4305,11 +4318,9 @@ components:
           enum:
             - 0
             - 1
-        keywords:
-          type: array
-          description: Application keywords
-          items:
-            type: string
+        tags:
+          type: string
+          description: Configuration tags
         owner_type:
           type: string
           description: Owner type
