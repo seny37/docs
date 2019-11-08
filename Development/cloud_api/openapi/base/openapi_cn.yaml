@@ -782,11 +782,11 @@ paths:
                 type: string
                 enum: 
                   - exception
-  /{object}.tags.create:
+  /{object}.tags.update:
     post:
       tags:
         - xtags
-      summary: 创建标签
+      summary: 更新标签
       operationId: createTags
       parameters:
         - name: object
@@ -807,92 +807,7 @@ paths:
             type: string
         - name: tags
           in: query
-          description: 标签列表
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-
-      responses:
-        '200':
-          $ref: '#/components/responses/ApiResponse'
-        default:
-          $ref: '#/components/responses/ApiExceptionResponse'
-        '501':
-          description: Error enums
-          content:
-            application/json:
-              schema:
-                type: string
-                enum: 
-                  - exception
-                  - has_no_permission
-  /{object}.tags.remove:
-    post:
-      tags:
-        - xtags
-      summary: 删除标签
-      operationId: removeTags
-      parameters:
-        - name: object
-          in: path
-          description: 对象类型
-          required: true
-          schema:
-            type: string
-            enum:
-              - gateways
-              - applications
-              - configurations
-        - name: name
-          in: query
-          description: 对象ID
-          required: true
-          schema:
-            type: string
-        - name: tags
-          in: query
-          description: 标签列表
-          required: true
-          schema:
-            type: array
-            items:
-              type: string
-      responses:
-        '200':
-          $ref: '#/components/responses/ApiResponse'
-        default:
-          $ref: '#/components/responses/ApiExceptionResponse'
-        '501':
-          description: Error enums
-          content:
-            application/json:
-              schema:
-                type: string
-                enum: 
-                  - exception
-                  - has_no_permission
-  /{object}.tags.clear:
-    post:
-      tags:
-        - xtags
-      summary: 清楚标签
-      operationId: clearTags
-      parameters:
-        - name: object
-          in: path
-          description: 对象类型
-          required: true
-          schema:
-            type: string
-            enum:
-              - gateways
-              - applications
-              - configurations
-        - name: name
-          in: query
-          description: 对象ID
+          description: 标签列表 (逗号分割的字符串）
           required: true
           schema:
             type: string
