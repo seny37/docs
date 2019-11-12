@@ -2057,7 +2057,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Refresh all installed extension list
+      summary: Upgrade sepecified extension to newer version (older is also ok)
       operationId: listGatewayInstalledExts
       requestBody:
         content:
@@ -3571,6 +3571,89 @@ paths:
         - store
       summary: List all avaiable application tags
       operationId: listStoreApplicationTags
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.list:
+    post:
+      tags:
+        - store
+      summary: List user's favorite applications
+      operationId: listStoreFavoriteApplications
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.add:
+    post:
+      tags:
+        - store
+      summary: Add new favorite application
+      operationId: addStoreFavoriteApplication
+      parameters:
+        - name: app
+          in: query
+          description: Application ID
+          required: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          description: Favorite comment
+          required: false
+          schema:
+            type: string
+        - name: priority
+          in: query
+          description: List order prioriy???
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.remove:
+    post:
+      tags:
+        - store
+      summary: Remove favorite application
+      operationId: removeStoreFavoriteApplications
+      parameters:
+        - name: app
+          in: query
+          description: Application ID
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'

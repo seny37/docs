@@ -981,7 +981,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Upgrade gateway freeioe version acknowledgment
+      summary: 网关软件升级确认（当网关软件升级时指定的no_ack是0时，需要在网关重启后五分钟内使用本接口确认，否则网关软件会回滚到老版本）
       operationId: upgradeGatwaySoftwareAck
       parameters:
         - name: name
@@ -1606,7 +1606,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Trigger application restart
+      summary: 重启应用实例
       operationId: restartGatewayApplication
       requestBody:
         content:
@@ -1670,7 +1670,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Query buffered application log and upload to cloud
+      summary: 查询最近的日志（网关缓存的部分日志）
       operationId: queryGatwayApplicationLog
       requestBody:
         content:
@@ -1696,7 +1696,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Query buffered application communication stream data and upload to cloud
+      summary: 查询最近的通讯报文
       operationId: queryGatwayApplicationComm
       requestBody:
         content:
@@ -1722,7 +1722,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Upload application communication stream data to cloud
+      summary: 请求网关上送通讯报文
       operationId: uploadGatwayApplicationComm
       requestBody:
         content:
@@ -1751,8 +1751,8 @@ paths:
     post:
       tags:
         - gateways
-      summary: Update application option/setings
-      operationId: optionatwayApplication
+      summary: 更新应用的配置信息
+      operationId: optionGatwayApplication
       requestBody:
         content:
           application/json:
@@ -1785,8 +1785,8 @@ paths:
     post:
       tags:
         - gateways
-      summary: Update application option/setings
-      operationId: optionatwayApplication
+      summary: 更改应用实例名
+      operationId: renameGatwayApplication
       requestBody:
         content:
           application/json:
@@ -2019,7 +2019,7 @@ paths:
     get:
       tags:
         - gateways
-      summary: List all installed extension from gateway
+      summary: 获取网关安装的所有扩展包列表
       operationId: listGatewayInstalledExts
       parameters:
         - name: gateway
@@ -2034,7 +2034,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Refresh all installed extension list
+      summary: 强制网关上送安装的扩展包列表
       operationId: listGatewayInstalledExts
       requestBody:
         content:
@@ -2057,7 +2057,7 @@ paths:
     post:
       tags:
         - gateways
-      summary: Refresh all installed extension list
+      summary: 升级制定的扩展包到新版本
       operationId: listGatewayInstalledExts
       requestBody:
         content:
@@ -3571,6 +3571,89 @@ paths:
         - store
       summary: 获取应用市场所有可用的应用标签
       operationId: listStoreApplicationTags
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.list:
+    post:
+      tags:
+        - store
+      summary: 获取用户的收藏的应用列表
+      operationId: listStoreFavoriteApplications
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.add:
+    post:
+      tags:
+        - store
+      summary: 添加应用到收藏列表
+      operationId: addStoreFavoriteApplication
+      parameters:
+        - name: app
+          in: query
+          description: 应用ID
+          required: true
+          schema:
+            type: string
+        - name: comment
+          in: query
+          description: 收藏备注
+          required: false
+          schema:
+            type: string
+        - name: priority
+          in: query
+          description: 排序优先级（目前不支持)
+          required: false
+          schema:
+            type: string
+      responses:
+        '200':
+          $ref: '#/components/responses/ApiResponse'
+        default:
+          $ref: '#/components/responses/ApiExceptionResponse'
+        '501':
+          description: Error enums
+          content:
+            application/json:
+              schema:
+                type: string
+                enum: 
+                  - exception
+  /store.favorites.remove:
+    post:
+      tags:
+        - store
+      summary: 从收藏列表里删除应用
+      operationId: removeStoreFavoriteApplications
+      parameters:
+        - name: app
+          in: query
+          description: 应用ID
+          required: true
+          schema:
+            type: string
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
