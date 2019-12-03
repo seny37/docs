@@ -28,8 +28,8 @@ tags:
   - name: applications
     description: FreeIOE Application Store
     externalDocs:
-     description: Find out more
-     url: 'http://freeioe.org'
+      description: Find out more
+      url: 'http://freeioe.org'
   - name: configurations
     description: 'Operations about device configuration, application templates'
   - name: companies
@@ -222,10 +222,10 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exeception
                   - reset_key_required
-                  - reset_key_incorrect 
+                  - reset_key_incorrect
                   - update_password_failed
       parameters: []
   /user.reset_password:
@@ -244,7 +244,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - guest_not_allowed
                   - not_allowed
                   - user_disabled
@@ -270,7 +270,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_exists
                   - authorization_code_created
@@ -291,7 +291,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
       parameters: []
@@ -310,7 +310,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
       parameters: []
@@ -329,7 +329,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
                   - auth_code_removed
@@ -362,7 +362,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - virtual_gateway_created
   /user.virtual_gateways.read:
@@ -382,7 +382,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - virtual_gateway_created
                   - has_no_permission
@@ -439,7 +439,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.count:
@@ -482,7 +482,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.read:
@@ -519,7 +519,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.dispose:
@@ -563,7 +563,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.list:
@@ -619,7 +619,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.count:
@@ -662,14 +662,14 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.read:
     get:
       tags:
         - events
-      summary: Get event detailed information 
+      summary: Get event detailed information
       operationId: getEventInfo
       parameters:
         - name: category
@@ -699,7 +699,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.event.dispose:
@@ -743,14 +743,14 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{object}.tags.list:
     get:
       tags:
         - xtags
-      summary: Get object tags 
+      summary: Get object tags
       operationId: listTags
       parameters:
         - name: object
@@ -780,7 +780,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /{object}.tags.update:
     post:
@@ -822,7 +822,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /gateways.test:
@@ -1470,7 +1470,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1505,7 +1505,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1531,7 +1531,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1560,7 +1560,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 int:
                   type: string
@@ -1586,7 +1586,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1615,7 +1615,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1644,7 +1644,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1679,7 +1679,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1705,7 +1705,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1731,7 +1731,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1760,7 +1760,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1794,7 +1794,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 inst:
                   type: string
@@ -1841,7 +1841,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 beta:
                   description: Enable beta or not
@@ -1935,7 +1935,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 name:
                   type: string
@@ -1961,7 +1961,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 name:
                   type: string
@@ -1996,7 +1996,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 name:
                   type: string
@@ -2043,7 +2043,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 id:
                   type: string
@@ -2066,13 +2066,13 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: Gateway ID ( serial number )
                 extension:
-                  type: string                
+                  type: string
                   description: Extension ID
                 version:
-                  type: string                
+                  type: string
                   description: Extension Version
                 id:
                   type: string
@@ -2313,14 +2313,14 @@ paths:
               type: object
               properties:
                 name:
-                  type: string                
-                  description: Application ID 
+                  type: string
+                  description: Application ID
                 version:
                   type: int
                   description: Application version number to fork
                 pre_conf:
-                  type: string                
-                  description: Application pre-configuration 
+                  type: string
+                  description: Application pre-configuration
       responses:
         '200':
           $ref: '#/components/responses/ApiResponse'
@@ -2346,7 +2346,7 @@ paths:
           required: false
           schema:
             type: integer
-        - name: owner
+        - name: developer
           in: query
           description: The user id who forks this application
           required: false
@@ -3225,7 +3225,7 @@ paths:
               type: object
               properties:
                 task_name:
-                  type: string                
+                  type: string
                   description: Task readable name
                 description:
                   type: string
@@ -3294,9 +3294,9 @@ paths:
       summary: Get applications
       operationId: getStoreApplicationList
       parameters:
-        - name: owner
+        - name: developer
           in: query
-          description: Application Owner ID    
+          description: Application developer ID
           required: false
           schema:
             type: string
@@ -3314,7 +3314,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: Application ID    
+          description: Application ID
           required: true
           schema:
             type: string
@@ -3348,9 +3348,9 @@ paths:
               - Template
               - Configuration
               - Other
-        - name: owner
+        - name: developer
           in: query
-          description: Configuration owner
+          description: Configuration developer ID
           required: false
           schema:
             type: string
@@ -3369,7 +3369,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: Configuration ID    
+          description: Configuration ID
           required: true
           schema:
             type: string
@@ -3383,7 +3383,7 @@ paths:
     get:
       tags:
         - store
-      summary: Get store operation object list 
+      summary: Get store operation object list
       operationId: listStoreOperationObjects
       parameters:
         - name: operation
@@ -3413,7 +3413,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.create:
     post:
@@ -3439,7 +3439,7 @@ paths:
               type: object
               properties:
                 app:
-                  type: string                
+                  type: string
                   description: Application id
       responses:
         '200':
@@ -3452,7 +3452,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.read:
     get:
@@ -3488,7 +3488,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.update:
     post:
@@ -3514,7 +3514,7 @@ paths:
               type: object
               properties:
                 name:
-                  type: string                
+                  type: string
                   description: Operation Object id
       responses:
         '200':
@@ -3527,7 +3527,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.remove:
     post:
@@ -3563,7 +3563,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.tags.list:
     post:
@@ -3582,7 +3582,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.list:
     post:
@@ -3601,7 +3601,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.add:
     post:
@@ -3639,7 +3639,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.remove:
     post:
@@ -3665,7 +3665,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /developers.requisition.list:
     get:
@@ -4240,6 +4240,9 @@ components:
         tags:
           type: string
           description: Application tags
+        company:
+          type: string
+          description: Company ID
     Application:
       type: object
       properties:
@@ -4295,9 +4298,12 @@ components:
         tags:
           type: string
           description: Application .tags.list
-        owner:
+        developer:
           type: string
-          description: Onwer ID
+          description: developer ID
+        company:
+          type: string
+          description: Company ID
     ApplicationVersionNew:
       type: object
       properties:
@@ -4364,16 +4370,12 @@ components:
         tags:
           type: string
           description: Configuration tags
-        owner_type:
+        developer:
           type: string
-          description: Owner type
-          enum:
-            - User
-            - Cloud Company Group
-          default: User
-        owner_id:
+          description: developer ID
+        company:
           type: string
-          description: Onwer ID
+          description: Company ID
     Configuration:
       type: object
       properties:
@@ -4404,19 +4406,12 @@ components:
         tags:
           type: string
           description: Configuration tags
-        owner_type:
+        developer:
           type: string
-          description: Owner type
-          enum:
-            - User
-            - Cloud Company Group
-          default: User
-        owner_id:
+          description: developer ID
+        company:
           type: string
-          description: Onwer ID
-        owner_company:
-          type: string
-          description: Owner company id
+          description: Company ID
     ConfigurationVersionNew:
       type: object
       properties:

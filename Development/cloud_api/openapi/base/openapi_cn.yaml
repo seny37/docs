@@ -28,8 +28,8 @@ tags:
   - name: applications
     description: FreeIOE应用管理接口
     externalDocs:
-     description: Find out more
-     url: 'http://freeioe.org'
+      description: Find out more
+      url: 'http://freeioe.org'
   - name: configurations
     description: '配置（设备配置以及设备模板）管理接口'
   - name: companies
@@ -222,10 +222,10 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exeception
                   - reset_key_required
-                  - reset_key_incorrect 
+                  - reset_key_incorrect
                   - update_password_failed
       parameters: []
   /user.reset_password:
@@ -244,7 +244,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - guest_not_allowed
                   - not_allowed
                   - user_disabled
@@ -270,7 +270,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_exists
                   - authorization_code_created
@@ -291,7 +291,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
       parameters: []
@@ -310,7 +310,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
       parameters: []
@@ -329,7 +329,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - authorization_code_not_exists
                   - auth_code_removed
@@ -362,7 +362,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - virtual_gateway_created
   /user.virtual_gateways.read:
@@ -382,7 +382,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - virtual_gateway_created
                   - has_no_permission
@@ -439,7 +439,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.count:
@@ -482,7 +482,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.read:
@@ -519,7 +519,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.activities.dispose:
@@ -563,7 +563,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.list:
@@ -619,7 +619,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.count:
@@ -662,7 +662,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.events.read:
@@ -699,7 +699,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{category}.event.dispose:
@@ -743,7 +743,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /{object}.tags.list:
@@ -780,7 +780,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /{object}.tags.update:
     post:
@@ -822,7 +822,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
                   - has_no_permission
   /gateways.test:
@@ -1470,7 +1470,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 inst:
                   type: string
@@ -1505,7 +1505,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 inst:
                   type: string
@@ -1531,7 +1531,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 inst:
                   type: string
@@ -1560,7 +1560,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 int:
                   type: string
@@ -1586,7 +1586,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 inst:
                   type: string
@@ -1615,7 +1615,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1644,7 +1644,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 inst:
                   type: string
@@ -1679,7 +1679,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1705,7 +1705,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1731,7 +1731,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1760,7 +1760,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1794,7 +1794,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 inst:
                   type: string
@@ -1841,7 +1841,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 beta:
                   description: 开启或关闭Beta模式
@@ -1935,7 +1935,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 name:
                   type: string
@@ -1961,7 +1961,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 name:
                   type: string
@@ -1996,7 +1996,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关ID(序列号)
                 name:
                   type: string
@@ -2043,7 +2043,7 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 id:
                   type: string
@@ -2066,13 +2066,13 @@ paths:
               type: object
               properties:
                 gateway:
-                  type: string                
+                  type: string
                   description: 网关 ID ( serial number )
                 extension:
-                  type: string                
+                  type: string
                   description: Extension ID
                 version:
-                  type: string                
+                  type: string
                   description: Extension Version
                 id:
                   type: string
@@ -2313,13 +2313,13 @@ paths:
               type: object
               properties:
                 name:
-                  type: string                
-                  description: 应用 ID 
+                  type: string
+                  description: 应用 ID
                 version:
                   type: int
                   description: 指定克隆的版本
                 pre_conf:
-                  type: string                
+                  type: string
                   description: 应用预定义配置（指定后则使用新的预定义配置，否则使用源应用预定义配置) 
       responses:
         '200':
@@ -2346,9 +2346,9 @@ paths:
           required: false
           schema:
             type: integer
-        - name: owner
+        - name: developer
           in: query
-          description: 克隆用户（可选，指定后只查询该用户的克隆)
+          description: 克隆开发者用户（可选，指定后只查询该开发者用户的克隆)
           required: false
           schema:
             type: string
@@ -3225,7 +3225,7 @@ paths:
               type: object
               properties:
                 task_name:
-                  type: string                
+                  type: string
                   description: 任务名称
                 description:
                   type: string
@@ -3294,9 +3294,9 @@ paths:
       summary: 获取应用列表
       operationId: getStoreApplicationList
       parameters:
-        - name: owner
+        - name: developer
           in: query
-          description: 应用所有者ID    
+          description: 应用开发者ID
           required: false
           schema:
             type: string
@@ -3314,7 +3314,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: 应用ID（应用市场）    
+          description: 应用ID（应用市场）
           required: true
           schema:
             type: string
@@ -3348,9 +3348,9 @@ paths:
               - Template
               - Configuration
               - Other
-        - name: owner
+        - name: developer
           in: query
-          description: 配置所有者
+          description: 配置开发者
           required: false
           schema:
             type: string
@@ -3369,7 +3369,7 @@ paths:
       parameters:
         - name: name
           in: query
-          description: 配置（模板） ID    
+          description: 配置（模板） ID
           required: true
           schema:
             type: string
@@ -3383,7 +3383,7 @@ paths:
     get:
       tags:
         - store
-      summary: 获取应用讨论、评论、问题列表 
+      summary: 获取应用讨论、评论、问题列表
       operationId: listStoreOperationObjects
       parameters:
         - name: operation
@@ -3413,7 +3413,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.create:
     post:
@@ -3439,7 +3439,7 @@ paths:
               type: object
               properties:
                 app:
-                  type: string                
+                  type: string
                   description: 应用ID（应用市场）
       responses:
         '200':
@@ -3452,7 +3452,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.read:
     get:
@@ -3488,7 +3488,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.update:
     post:
@@ -3514,7 +3514,7 @@ paths:
               type: object
               properties:
                 name:
-                  type: string                
+                  type: string
                   description: 对象ID
       responses:
         '200':
@@ -3527,7 +3527,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.{operation}.remove:
     post:
@@ -3563,7 +3563,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.tags.list:
     post:
@@ -3582,7 +3582,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.list:
     post:
@@ -3601,7 +3601,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.add:
     post:
@@ -3639,7 +3639,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /store.favorites.remove:
     post:
@@ -3665,7 +3665,7 @@ paths:
             application/json:
               schema:
                 type: string
-                enum: 
+                enum:
                   - exception
   /developers.requisition.list:
     get:
@@ -4295,9 +4295,12 @@ components:
         tags:
           type: string
           description: 应用标签
-        owner:
+        developer:
           type: string
-          description: 所有者ID
+          description: 开发者ID
+        company:
+          type: string
+          description: 所属公司 ID
     ApplicationVersionNew:
       type: object
       properties:
@@ -4364,16 +4367,12 @@ components:
         tags:
           type: string
           description: 标签
-        owner_type:
-          type: string
-          description: 所有者类型
-          enum:
-            - User
-            - Cloud Company Group
-          default: User
-        owner_id:
+        developer:
           type: string
           description: 所有者ID
+        company:
+          type: string
+          description: 所属公司 ID
     Configuration:
       type: object
       properties:
@@ -4404,17 +4403,10 @@ components:
         tags:
           type: string
           description: 标签
-        owner_type:
-          type: string
-          description: 所有者类型
-          enum:
-            - User
-            - Cloud Company Group
-          default: User
-        owner_id:
+        developer:
           type: string
           description: 所有者ID
-        owner_company:
+        company:
           type: string
           description: 所属公司ID
     ConfigurationVersionNew:
